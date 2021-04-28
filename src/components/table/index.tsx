@@ -1,0 +1,37 @@
+import React from "react";
+import { CellsContext } from "../../context/CellsContext";
+import { ColorsContext } from "../../context/ColorsContext";
+import { Cell } from "../cell";
+import styles from "./styles.module.css";
+
+interface IPropsTable {
+  size: number;
+}
+export const Table = ({ size }: IPropsTable) => {
+  const { cells, newTable } = React.useContext(CellsContext);
+  const { setMouseOver } = React.useContext(ColorsContext);
+
+  React.useEffect(() => {
+    newTable(size);
+  }, [size]);
+
+  return (
+    <div
+      className={styles.table}
+      onMouseUp={() => setMouseOver(false)}
+      onMouseDown={() => setMouseOver(true)}
+      onMouseLeave={() => setMouseOver(false)}
+    >
+      {cells &&
+        cells.map((cell) => {
+          return (
+            <Cell
+              color={cell.color}
+              id_color={cell.id}
+              key={"cell_key_" + cell.id}
+            />
+          );
+        })}
+    </div>
+  );
+};
