@@ -7,7 +7,9 @@ interface ICellsProviderProps {
 interface ICellsContext {
   cells: [{ color: string; id: string }];
   zoom: number;
-  newTable: (size: number) => void;
+  size: number;
+  changeSize: (size: number) => void;
+  newTable: () => void;
   paintCell: (id: string, color: string) => void;
   eraseCell: (id: string) => void;
   ChangeZoom: (zoomType: "in" | "out") => void;
@@ -19,9 +21,13 @@ export const CellsProvider = ({ children }: ICellsProviderProps) => {
   const [cells, setCells] = React.useState([{}] as [
     { color: string; id: string }
   ]);
-  const [zoom, setZoom] = React.useState(1.4);
+  const [size, setSize] = React.useState(16);
+  const [zoom, setZoom] = React.useState(24 / size);
 
-  function newTable(size: number) {
+  function changeSize(size) {
+    setSize(size);
+  }
+  function newTable() {
     let arraysCells = [];
     const totalCells = size * size;
     for (let i = 0; i < totalCells; i++) {
@@ -55,16 +61,28 @@ export const CellsProvider = ({ children }: ICellsProviderProps) => {
   }
 
   function ChangeZoom(zoomType: "in" | "out") {
-    if (zoomType === "in" && zoom <= 1.8) {
-      setZoom(+(zoom + 0.2).toFixed(1));
-    } else if (zoomType === "out" && zoom > 0.6) {
-      setZoom(+(zoom * 0.8).toFixed(1));
+    if (zoomType === "in" && zoom <= 24 / size + 6 / size) {
+      //Tamanho incial + até onde pode aumentar
+
+      setZoom(+(zoom + 4 / size).toFixed(1));
+      //Ajusta a velocidade para o tamanho do zoom
+    } else if (zoomType === "out" && zoom > 8 / size) {
+      setZoom(+(zoom - 4 / size).toFixed(1));
     }
     console.log(zoom);
   }
   return (
     <CellsContext.Provider
-      value={{ cells, newTable, paintCell, eraseCell, ChangeZoom, zoom }}
+      value={{
+        cells,
+        zoom,
+        size,
+        changeSize,
+        newTable,
+        paintCell,
+        eraseCell,
+        ChangeZoom,
+      }}
     >
       {children}
     </CellsContext.Provider>

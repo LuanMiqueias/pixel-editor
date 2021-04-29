@@ -7,12 +7,14 @@ import styles from "./styles.module.css";
 interface IPropsTable {
   size: number;
 }
-export const Table = ({ size }: IPropsTable) => {
-  const { cells, zoom, newTable, ChangeZoom } = React.useContext(CellsContext);
+export const Table = () => {
+  const { cells, zoom, size, newTable, ChangeZoom } = React.useContext(
+    CellsContext
+  );
   const { setMouseOver } = React.useContext(ColorsContext);
 
   React.useEffect(() => {
-    newTable(size);
+    newTable();
   }, [size]);
 
   return (
@@ -24,6 +26,10 @@ export const Table = ({ size }: IPropsTable) => {
       onWheel={(e) => {
         if (e.deltaY < 0) ChangeZoom("in");
         else ChangeZoom("out");
+      }}
+      style={{
+        gridTemplateColumns: `repeat(${size}, auto)`,
+        gridTemplateRows: `repeat(${size}, auto)`,
       }}
     >
       {cells &&

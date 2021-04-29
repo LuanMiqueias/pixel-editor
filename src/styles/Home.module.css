@@ -17,8 +17,8 @@
   gap:24px;
 }
 .conatiner_table{
-  min-width:512px; 
-  min-height:512px; 
+  width:512px; 
+  height:512px; 
   display:flex;
   align-items: center;
   justify-content: center;
