@@ -14,6 +14,7 @@ interface ICellsContext {
   paintCell: (id: string, color: string) => void;
   eraseCell: (id: string) => void;
   ChangeZoom: (zoomType: "in" | "out") => void;
+  resetCells: () => void;
 }
 
 export const CellsContext = React.createContext({} as ICellsContext);
@@ -91,6 +92,9 @@ export const CellsProvider = ({ children }: ICellsProviderProps) => {
     }
     console.log(zoom);
   }
+  function resetCells() {
+    newTable();
+  }
   return (
     <CellsContext.Provider
       value={{
@@ -103,6 +107,7 @@ export const CellsProvider = ({ children }: ICellsProviderProps) => {
         paintCell,
         eraseCell,
         ChangeZoom,
+        resetCells,
       }}
     >
       {children}

@@ -16,7 +16,7 @@ export const ToolbarItem = ({
   text,
   toolCustom,
 }: IPropsToolBarItem) => {
-  const { tool, gridOn, changeTool, useTool } = React.useContext(
+  const { tool, toolCustomActive, changeTool, useTool } = React.useContext(
     ToolBarContext
   );
   return (
@@ -27,11 +27,11 @@ export const ToolbarItem = ({
           onClick={() => useTool(null, null, type)}
         >
           {!text ? (
-            <img src={!gridOn ? hover : img} alt={type} />
+            <img src={toolCustomActive[type] ? hover : img} alt={type} />
           ) : (
             <div className={styles.text}>
               <p>{text}</p>
-              <p>size</p>
+              <p>{type}</p>
             </div>
           )}
         </div>

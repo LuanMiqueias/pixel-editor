@@ -5,6 +5,7 @@
   justify-content: center;
   align-items: center;
   background-color: #202020;
+  overflow: hidden;
 }
 
 .content {

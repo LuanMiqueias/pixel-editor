@@ -15,7 +15,7 @@
   transform:scale(0.9);
 }
 .item img{
-  width: 22px;
+  width: 24px;
 }
 .item:nth-child(1) img{
   margin-left: 2px;
