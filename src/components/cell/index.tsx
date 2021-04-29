@@ -5,8 +5,9 @@ import styles from "./styles.module.css";
 interface IPropsCell {
   color: string;
   id_color: string;
+  size: number;
 }
-export const Cell = ({ color, id_color }: IPropsCell) => {
+export const Cell = ({ color, id_color, size }: IPropsCell) => {
   const { tool, useTool } = React.useContext(ToolBarContext);
   return (
     <div
@@ -14,9 +15,11 @@ export const Cell = ({ color, id_color }: IPropsCell) => {
       onMouseDown={(e) => useTool(e, id_color)}
       onMouseOver={(e) => useTool(e, id_color)}
       onContextMenu={(e) => e.preventDefault()}
-      style={
-        color !== "initial" ? { background: color } : { background: "#505050" }
-      }
+      style={{
+        background: color !== "initial" ? color : "#505050",
+        width: `${size}rem`,
+        height: `${size}rem`,
+      }}
     ></div>
   );
 };

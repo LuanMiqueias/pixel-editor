@@ -23,7 +23,9 @@ export default function Home() {
           <ToolBarProvider>
             <main className={styles.content}>
               <ColorPalette />
-              <Table size={16} />
+                <div className={styles.conatiner_table}>
+                  <Table size={16} />
+                </div>
               <Toolbar />
             </main>
           </ToolBarProvider>

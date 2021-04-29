@@ -19,8 +19,8 @@ export const ColorPalette = () => {
   ];
   return (
     <div className={`${styles.palette}`}>
-      {colors.map((color) => (
-        <Color color={color} />
+      {colors.map((color, index) => (
+        <Color color={color} key={`color_${color}_${index}`} />
       ))}
     </div>
   );

@@ -1,5 +1,5 @@
 .container {
-  height: 100vh;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -14,6 +14,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
   gap:24px;
+}
+.conatiner_table{
+  min-width:512px; 
+  min-height:512px; 
+  display:flex;
+  align-items: center;
+  justify-content: center;
 }
