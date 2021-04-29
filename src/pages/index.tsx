@@ -14,6 +14,10 @@ export default function Home() {
       <Head>
         <title>Pixel Art</title>
       </Head>
+      <h1>
+        {" "}
+        <img src="./logo.svg" alt="" />{" "}
+      </h1>
       <CellsProvider>
         <ColorsProvider>
           <ToolBarProvider>
