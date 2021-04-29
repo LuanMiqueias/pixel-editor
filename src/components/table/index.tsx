@@ -8,9 +8,14 @@ interface IPropsTable {
   size: number;
 }
 export const Table = () => {
-  const { cells, zoom, size, newTable, ChangeZoom } = React.useContext(
-    CellsContext
-  );
+  const {
+    cells,
+    zoom,
+    size,
+    animationCells,
+    newTable,
+    ChangeZoom,
+  } = React.useContext(CellsContext);
   const { setMouseOver } = React.useContext(ColorsContext);
 
   React.useEffect(() => {
@@ -19,7 +24,7 @@ export const Table = () => {
 
   return (
     <div
-      className={styles.table}
+      className={`${styles.table}  ${animationCells && styles.animation_show}`}
       onMouseUp={() => setMouseOver(false)}
       onMouseDown={() => setMouseOver(true)}
       onMouseLeave={() => setMouseOver(false)}

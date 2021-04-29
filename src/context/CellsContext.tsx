@@ -8,7 +8,8 @@ interface ICellsContext {
   cells: [{ color: string; id: string }];
   zoom: number;
   size: number;
-  changeSize: (size: number) => void;
+  animationCells: boolean;
+  changeSize: () => void;
   newTable: () => void;
   paintCell: (id: string, color: string) => void;
   eraseCell: (id: string) => void;
@@ -23,9 +24,28 @@ export const CellsProvider = ({ children }: ICellsProviderProps) => {
   ]);
   const [size, setSize] = React.useState(16);
   const [zoom, setZoom] = React.useState(24 / size);
+  const [animationCells, setAnimationCells] = React.useState(false);
 
-  function changeSize(size) {
-    setSize(size);
+  React.useEffect(() => {
+    setZoom(24 / size);
+  }, [size]);
+  function changeSize() {
+    setAnimationCells(true);
+    switch (size) {
+      case 8:
+        setSize(16);
+        break;
+      case 16:
+        setSize(32);
+        break;
+      case 32:
+        setSize(8);
+        break;
+    }
+    setZoom(24 / size);
+    setTimeout(() => {
+      setAnimationCells(false);
+    }, 800);
   }
   function newTable() {
     let arraysCells = [];
@@ -77,6 +97,7 @@ export const CellsProvider = ({ children }: ICellsProviderProps) => {
         cells,
         zoom,
         size,
+        animationCells,
         changeSize,
         newTable,
         paintCell,

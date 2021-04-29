@@ -1,4 +1,5 @@
 import React from "react";
+import { CellsContext } from "../../context/CellsContext";
 import { ToolBarContext } from "../../context/ToolBarContext";
 import styles from "./styles.module.css";
 
@@ -9,6 +10,8 @@ interface IPropsCell {
 }
 export const Cell = ({ color, id_color, size }: IPropsCell) => {
   const { gridOn, useTool } = React.useContext(ToolBarContext);
+  // const { animationCells } = React.useContext(CellsContext);
+
   return (
     <div
       className={`${styles.cell} ${!gridOn && styles.cell_no_border}`}

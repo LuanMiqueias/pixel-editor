@@ -3,22 +3,37 @@ import { ToolBarContext } from "../../../context/ToolBarContext";
 import styles from "./styles.module.css";
 
 interface IPropsToolBarItem {
-  img: string;
+  img?: string;
   type: string;
+  toolCustom?: boolean;
   hover?: string;
+  text?: string;
 }
-export const ToolbarItem = ({ img, type, hover }: IPropsToolBarItem) => {
+export const ToolbarItem = ({
+  img,
+  type,
+  hover,
+  text,
+  toolCustom,
+}: IPropsToolBarItem) => {
   const { tool, gridOn, changeTool, useTool } = React.useContext(
     ToolBarContext
   );
   return (
     <>
-      {type === "grid" ? (
+      {toolCustom ? (
         <div
           className={`${styles.item}`}
           onClick={() => useTool(null, null, type)}
         >
-          <img src={!gridOn ? hover : img} alt={type} />
+          {!text ? (
+            <img src={!gridOn ? hover : img} alt={type} />
+          ) : (
+            <div className={styles.text}>
+              <p>{text}</p>
+              <p>size</p>
+            </div>
+          )}
         </div>
       ) : (
         <div
