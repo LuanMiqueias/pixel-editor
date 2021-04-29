@@ -1,6 +1,6 @@
 
 <p align="center">
-  <a href="www.[seu-projeto]">Visualizar demo</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
+  <a href="https://pixel-editor-theta.vercel.app/">Visualizar demo</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#tecnologias">Tecnologias</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#sobre">Sobre</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
   <a href="#para-rodar-o-projeto">Como executar</a>&nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
@@ -36,5 +36,5 @@ Um editor de Pixel Art feito com NextJS e Typescript com objetivo principal de c
 - Depois rode a aplicação com `yarn dev` ou `npm run dev`
 
 ## Imagens do projeto
-  Em breve novas imagens...
+  ![ezgif com-gif-maker (8)](https://user-images.githubusercontent.com/47904212/116494205-b880fb00-a876-11eb-86b3-45b5b785e258.gif)
 
