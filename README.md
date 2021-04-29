@@ -23,6 +23,9 @@ Um editor de Pixel Art feito com NextJS e Typescript com objetivo principal de c
 
 ## Principais funcionalidades da aplicação:
 - [x] Pintar pixel em um formato de 16x16.
+- [x] Esconder ou mostrar linhas do grid.
+- [x] Criar uma nova cor.
+- [x] Zoom.
 - [ ] Salvar e carregar projetos.
 - [ ] Escolher o tamanho como -> 16x16, 32x32, 64x64.
 - [ ] Salvar paletas de cores.
@@ -36,5 +39,6 @@ Um editor de Pixel Art feito com NextJS e Typescript com objetivo principal de c
 - Depois rode a aplicação com `yarn dev` ou `npm run dev`
 
 ## Imagens do projeto
-  ![ezgif com-gif-maker (8)](https://user-images.githubusercontent.com/47904212/116494205-b880fb00-a876-11eb-86b3-45b5b785e258.gif)
+  ![ezgif com-gif-maker (9)](https://user-images.githubusercontent.com/47904212/116560416-bdc26200-a8d7-11eb-85a4-bcdd1b9dbf9b.gif)
+
 
