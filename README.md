@@ -14,8 +14,9 @@
 
 ## Tecnologias 
 Nesse projeto ultilizei
-- [NextJS](https://github.com/)
-- [Typescript](https://github.com/)
+- [Next.js](https://nextjs.org/)
+- [TypeScript](https://www.typescriptlang.org/)
+
 
 ## Sobre
 Um editor de Pixel Art feito com NextJS e Typescript com objetivo principal de criar uma maneira simples sprites ou imagens 2D, podendo pintar e escolher a cor de cada pixel.
