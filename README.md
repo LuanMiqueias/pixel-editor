@@ -22,7 +22,7 @@ Nesse projeto ultilizei
 Um editor de Pixel Art feito com NextJS e Typescript com objetivo principal de criar uma maneira simples sprites ou imagens 2D, podendo pintar e escolher a cor de cada pixel.
 
 ## Principais funcionalidades da aplicação:
-- [x] Pintar pixel em um formato de 32x32.
+- [x] Pintar pixel em um formato de 16x16.
 - [ ] Salvar e carregar projetos.
 - [ ] Escolher o tamanho como -> 16x16, 32x32, 64x64.
 - [ ] Salvar paletas de cores.
