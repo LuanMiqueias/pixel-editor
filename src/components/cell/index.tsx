@@ -1,5 +1,5 @@
 import React from "react";
-import { ColorsContext } from "../../context/ColorsContext";
+import { ToolBarContext } from "../../context/ToolBarContext";
 import styles from "./styles.module.css";
 
 interface IPropsCell {
@@ -7,12 +7,12 @@ interface IPropsCell {
   id_color: string;
 }
 export const Cell = ({ color, id_color }: IPropsCell) => {
-  const { paint, erase } = React.useContext(ColorsContext);
+  const { tool, useTool } = React.useContext(ToolBarContext);
   return (
     <div
-      className={styles.cell}
-      onMouseDown={(e) => paint(e, id_color)}
-      onMouseOver={(e) => paint(e, id_color)}
+      className={`${styles.cell} ${tool === "erase" && styles.erase}`}
+      onMouseDown={(e) => useTool(e, id_color)}
+      onMouseOver={(e) => useTool(e, id_color)}
       onContextMenu={(e) => e.preventDefault()}
       style={
         color !== "initial" ? { background: color } : { background: "#505050" }

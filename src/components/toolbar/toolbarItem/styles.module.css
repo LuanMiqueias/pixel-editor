@@ -1,0 +1,31 @@
+.item{
+  height: 50px;
+  width: 50px;
+  background: #383838;
+  border-radius: 10px;
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.15);
+  cursor:pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all .1s;
+}
+.item:hover{
+  transition: all .05s;
+  transform:scale(0.9);
+}
+.item img{
+  width: 22px;
+}
+.item:nth-child(1) img{
+  margin-left: 2px;
+
+}
+.item_active{
+  background: #919191;
+  transform:scale(1.05);
+  box-shadow: 0 4px 5px rgba(0, 0, 0, 0.35);
+}
+.item_active:hover{
+  transform:scale(1.05);
+}

@@ -1,7 +1,11 @@
 import Head from "next/head";
+import { ColorPalette } from "../components/colorPalette";
 import { Table } from "../components/table";
+import { Toolbar } from "../components/toolbar";
 import { CellsProvider } from "../context/CellsContext";
 import { ColorsProvider } from "../context/ColorsContext";
+import { ToolBarProvider } from "../context/ToolBarContext";
+
 import styles from "../styles/Home.module.css";
 
 export default function Home() {
@@ -12,9 +16,13 @@ export default function Home() {
       </Head>
       <CellsProvider>
         <ColorsProvider>
-          <main className={styles.content}>
-            <Table size={16} />
-          </main>
+          <ToolBarProvider>
+            <main className={styles.content}>
+              <ColorPalette />
+              <Table size={16} />
+              <Toolbar />
+            </main>
+          </ToolBarProvider>
         </ColorsProvider>
       </CellsProvider>
     </div>

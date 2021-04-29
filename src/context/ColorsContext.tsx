@@ -19,7 +19,7 @@ export const ColorsContext = React.createContext({} as IColorsProps);
 export const ColorsProvider = ({ children }: IColorsProviderProps) => {
   const [color, setColor] = React.useState("#FFF");
   const [mouseOver, setMouseOver] = React.useState(false);
-  const { cells, paintCell, eraseCell } = React.useContext(CellsContext);
+  const { paintCell, eraseCell } = React.useContext(CellsContext);
 
   function changeColor(color) {
     setColor(color);
@@ -27,7 +27,6 @@ export const ColorsProvider = ({ children }: IColorsProviderProps) => {
 
   function paint(e: React.MouseEvent, id: string) {
     e.preventDefault();
-    console.log(e.type === "mouseover" && !mouseOver);
     if (e.type === "mouseover") {
       return mouseOver && paintCell(id, color);
     } else {
@@ -36,8 +35,13 @@ export const ColorsProvider = ({ children }: IColorsProviderProps) => {
   }
   function erase(e: React.MouseEvent, id: string) {
     e.preventDefault();
-    eraseCell(id);
+    if (e.type === "mouseover") {
+      return mouseOver && eraseCell(id);
+    } else {
+      eraseCell(id);
+    }
   }
+
   return (
     <ColorsContext.Provider
       value={{

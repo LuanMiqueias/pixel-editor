@@ -4,10 +4,9 @@
   border-left: 1px solid #404040;
   border-bottom: 1px solid #404040;
   cursor: cell;
-  transition: all .1s;
   user-select: none;
 }
-.cell:hover{
-  transition: all 0s;
-  opacity: .9;
+
+.erase{
+  cursor: pointer;
 }
