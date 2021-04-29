@@ -9,8 +9,9 @@ export const Toolbar = () => {
   return (
     <div className={styles.toolbar}>
       <ToolbarItem type="draw" img={"/draw_dark.svg"} />
-
       <ToolbarItem type="erase" img={"/erase_dark.svg"} />
+
+      <ToolbarItem type="grid" img="/grid_on.svg" hover="/grid_off.svg" />
     </div>
   );
 };

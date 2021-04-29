@@ -6,7 +6,6 @@
   cursor: cell;
   user-select: none;
 }
-
-.erase{
-  cursor: pointer;
+.cell_no_border{
+  border:transparent
 }

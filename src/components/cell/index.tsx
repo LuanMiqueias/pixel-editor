@@ -8,10 +8,10 @@ interface IPropsCell {
   size: number;
 }
 export const Cell = ({ color, id_color, size }: IPropsCell) => {
-  const { tool, useTool } = React.useContext(ToolBarContext);
+  const { gridOn, useTool } = React.useContext(ToolBarContext);
   return (
     <div
-      className={`${styles.cell} ${tool === "erase" && styles.erase}`}
+      className={`${styles.cell} ${!gridOn && styles.cell_no_border}`}
       onMouseDown={(e) => useTool(e, id_color)}
       onMouseOver={(e) => useTool(e, id_color)}
       onContextMenu={(e) => e.preventDefault()}
