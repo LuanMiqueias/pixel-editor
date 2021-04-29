@@ -17,7 +17,7 @@ interface IColorsProps {
 export const ColorsContext = React.createContext({} as IColorsProps);
 
 export const ColorsProvider = ({ children }: IColorsProviderProps) => {
-  const [color, setColor] = React.useState("#FFF");
+  const [color, setColor] = React.useState("#FFFFFF");
   const [mouseOver, setMouseOver] = React.useState(false);
   const { paintCell, eraseCell } = React.useContext(CellsContext);
 

@@ -10,7 +10,7 @@
   justify-content: center;
   transition: all .1s;
 }
-.item:hover{
-  transition: all .05s;
-  transform:scale(1.2);
+
+.item_selected{
+  transform:scale(0.85);
 }

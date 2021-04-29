@@ -7,11 +7,13 @@ interface IPropsToolBarItem {
   color: string;
 }
 export const Color = ({ color }: IPropsToolBarItem) => {
-  const { changeColor } = React.useContext(ColorsContext);
+  const { changeColor, color: colorSelect } = React.useContext(ColorsContext);
   const { changeTool } = React.useContext(ToolBarContext);
   return (
     <div
-      className={`${styles.item}`}
+      className={`${styles.item} ${
+        colorSelect === color && styles.item_selected
+      }`}
       style={{ background: color }}
       onClick={() => {
         changeColor(color);
