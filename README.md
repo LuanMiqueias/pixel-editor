@@ -26,8 +26,8 @@ Um editor de Pixel Art feito com NextJS e Typescript com objetivo principal de c
 - [x] Esconder ou mostrar linhas do grid.
 - [x] Criar uma nova cor.
 - [x] Zoom.
+- [x] Escolher o tamanho do grid como -> 16x16, 32x32, 64x64.
 - [ ] Salvar e carregar projetos.
-- [ ] Escolher o tamanho como -> 16x16, 32x32, 64x64.
 - [ ] Salvar paletas de cores.
 - [ ] Criar paletas de cores.
 - [ ] Editar cores que já estã na paleta.
