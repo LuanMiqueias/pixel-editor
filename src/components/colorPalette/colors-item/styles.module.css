@@ -1,4 +1,4 @@
-.item{
+.item, .pick_color{
   height: 28px;
   width: 28px;
   background: #383838;
@@ -10,7 +10,33 @@
   justify-content: center;
   transition: all .1s;
 }
-
 .item_selected{
   transform:scale(0.85);
+}
+.pick_color{
+  cursor: pointer;
+  margin-bottom:16px;
+  transform:scale(1.3);
+  position: relative;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+}
+.pick_color::before{
+  content: '';
+  position: absolute;
+  width: 14px;
+  height: 14px;
+  background: url('/edit.svg') center center / cover;
+}
+.pick_color > input{
+  border:0;
+  background: none;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  opacity: 0;
+  cursor: pointer;
 }

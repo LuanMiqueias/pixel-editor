@@ -19,6 +19,7 @@ export const ColorPalette = () => {
   ];
   return (
     <div className={`${styles.palette}`}>
+      <Color color="pick-color" />
       {colors.map((color, index) => (
         <Color color={color} key={`color_${color}_${index}`} />
       ))}

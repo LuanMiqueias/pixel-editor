@@ -25,10 +25,6 @@ export const Table = ({ size }: IPropsTable) => {
         if (e.deltaY < 0) ChangeZoom("in");
         else ChangeZoom("out");
       }}
-      style={{
-        gridTemplateColumns: `repeat(16, ${zoom}rem`,
-        gridTemplateRows: `repeat(16, ${zoom}rem`,
-      }}
     >
       {cells &&
         cells.map((cell) => {

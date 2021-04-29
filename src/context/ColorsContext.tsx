@@ -12,6 +12,7 @@ interface IColorsProps {
   erase?: (e: React.MouseEvent, id: string) => void;
   paint: (e: React.MouseEvent, id: string) => void;
   setMouseOver: React.Dispatch<React.SetStateAction<boolean>>;
+  handlePickedColor: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
 export const ColorsContext = React.createContext({} as IColorsProps);
@@ -41,7 +42,9 @@ export const ColorsProvider = ({ children }: IColorsProviderProps) => {
       eraseCell(id);
     }
   }
-
+  function handlePickedColor(e: React.ChangeEvent<HTMLInputElement>) {
+    changeColor(e.currentTarget.value);
+  }
   return (
     <ColorsContext.Provider
       value={{
@@ -51,6 +54,7 @@ export const ColorsProvider = ({ children }: IColorsProviderProps) => {
         paint,
         setMouseOver,
         erase,
+        handlePickedColor,
       }}
     >
       {children}
