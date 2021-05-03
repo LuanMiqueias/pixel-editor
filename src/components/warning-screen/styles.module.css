@@ -1,0 +1,52 @@
+.WarningScreen{
+  position: absolute;
+  top:32px;
+  right: 32px;
+  width: 340px;
+  height: 60px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+  background: rgb(223, 223, 223);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.88rem;
+  color:#303030;
+  
+  animation: timerOpacity 0.2s ease-out forwards 2s;
+}
+
+.WarningScreen::before{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 5px;
+  background: rgb(17, 199, 255);
+  border-radius: 5px;
+  animation: timer 2s linear forwards;
+}
+@keyframes timer{
+  to{
+    width: 100%;
+  }
+}
+@keyframes timerOpacity{
+  to{
+    transform: translateX(25%);
+    opacity: 0;
+  }
+}
+
+@keyframes show{
+  from{
+    transform: translateY(25%);
+    opacity: 0;    
+  }
+  to{
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

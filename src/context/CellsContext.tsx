@@ -16,6 +16,7 @@ interface ICellsContext {
   ChangeZoom: (zoomType: "in" | "out") => void;
   resetCells: () => void;
   saveCells: (title: string) => void;
+  message: string;
 }
 
 interface IPropsProjects {
@@ -37,6 +38,7 @@ export const CellsProvider = ({ children }: ICellsProviderProps) => {
   const [size, setSize] = React.useState(16);
   const [zoom, setZoom] = React.useState(24 / size);
   const [animationCells, setAnimationCells] = React.useState(false);
+  const [message, setMessage] = React.useState("");
 
   React.useEffect(() => {
     setZoom(24 / size);
@@ -156,6 +158,7 @@ export const CellsProvider = ({ children }: ICellsProviderProps) => {
         projects.push(newProject);
       }
       localStorage.projects = JSON.stringify(projects);
+      showMessage("save");
       return;
     }
 
@@ -163,9 +166,22 @@ export const CellsProvider = ({ children }: ICellsProviderProps) => {
     localStorage.projects = JSON.stringify([{ ...newProject }]);
   }
 
+  function showMessage(type) {
+    switch (type) {
+      case "save":
+        setMessage("Salvo com sucesso!");
+        break;
+      default:
+        setMessage("Sucesso!");
+    }
+    setTimeout(() => {
+      setMessage("");
+    }, 2500);
+  }
   return (
     <CellsContext.Provider
       value={{
+        message,
         cells,
         zoom,
         size,
