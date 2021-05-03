@@ -15,7 +15,7 @@
   transform:scale(0.9);
 }
 .item img{
-  width: 22px;
+  width: 24px;
 }
 .item:nth-child(1) img{
   margin-left: 2px;
@@ -46,4 +46,13 @@
 }
 .item_active:hover{
   transform:scale(1.05);
+}
+
+.item_disabled{
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.item_disabled:hover{
+  opacity: 0.3;
+  transform:initial;
 }
