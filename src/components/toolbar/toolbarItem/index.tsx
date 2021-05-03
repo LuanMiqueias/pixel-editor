@@ -26,7 +26,7 @@ export const ToolbarItem = ({
       {toolCustom ? (
         <div
           className={`${styles.item} ${disabled && styles.item_disabled}`}
-          onClick={() => useTool(null, null, type)}
+          onClick={() => !disabled && useTool(null, null, type)}
         >
           {!text ? (
             <img src={toolCustomActive[type] ? hover : img} alt={type} />
