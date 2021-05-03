@@ -47,3 +47,12 @@
 .item_active:hover{
   transform:scale(1.05);
 }
+
+.item_disabled{
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.item_disabled:hover{
+  opacity: 0.3;
+  transform:initial;
+}

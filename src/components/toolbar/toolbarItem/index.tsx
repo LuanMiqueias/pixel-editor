@@ -8,6 +8,7 @@ interface IPropsToolBarItem {
   toolCustom?: boolean;
   hover?: string;
   text?: string;
+  disabled?: boolean;
 }
 export const ToolbarItem = ({
   img,
@@ -15,6 +16,7 @@ export const ToolbarItem = ({
   hover,
   text,
   toolCustom,
+  disabled,
 }: IPropsToolBarItem) => {
   const { tool, toolCustomActive, changeTool, useTool } = React.useContext(
     ToolBarContext
@@ -23,7 +25,7 @@ export const ToolbarItem = ({
     <>
       {toolCustom ? (
         <div
-          className={`${styles.item}`}
+          className={`${styles.item} ${disabled && styles.item_disabled}`}
           onClick={() => useTool(null, null, type)}
         >
           {!text ? (

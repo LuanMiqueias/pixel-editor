@@ -19,7 +19,7 @@ export const ToolBarContext = React.createContext({} as IToolBarContext);
 export const ToolBarProvider = ({ children }: IToolBarProviderProps) => {
   const [tool, setTool] = React.useState("draw" as string);
   const { erase, paint } = React.useContext(ColorsContext);
-  const { changeSize, resetCells } = React.useContext(CellsContext);
+  const { changeSize, resetCells, saveCells } = React.useContext(CellsContext);
   const [toolCustomActive, setToolCustomActive] = React.useState(
     {} as string[]
   );
@@ -43,20 +43,26 @@ export const ToolBarProvider = ({ children }: IToolBarProviderProps) => {
         erase(e, id);
         break;
       case "grid":
-        setToolCustomActive(
-          gridOn
-            ? { ...toolCustomActive, [otherTool]: otherTool }
-            : { ...toolCustomActive, [otherTool]: "" }
-        );
-        setGridOn(!gridOn);
+        handleGrid(otherTool);
         break;
       case "size":
         changeSize();
         break;
+      case "save":
+        saveCells("test");
+        break;
       case "clean":
-        resetCells();
+        confirm("Isso irá limpar a tela, tem certeza?") && resetCells();
         break;
     }
+  }
+  function handleGrid(otherTool) {
+    setToolCustomActive(
+      gridOn
+        ? { ...toolCustomActive, [otherTool]: otherTool }
+        : { ...toolCustomActive, [otherTool]: "" }
+    );
+    setGridOn(!gridOn);
   }
   return (
     <ToolBarContext.Provider

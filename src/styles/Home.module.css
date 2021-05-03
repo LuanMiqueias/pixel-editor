@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500&display=swap');
+
 .container {
   min-height: 100vh;
   display: flex;
@@ -7,7 +9,19 @@
   background-color: #202020;
   overflow: hidden;
 }
-
+.container h1{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  font-size: 1rem;
+}
+.container h1 span{
+  padding: 0.45rem 0;
+  color:#606060;
+  font-weight: 400;
+  font-family: 'Josefin Sans', sans-serif;
+}
 .content {
   max-width: 880px;
   width: 100%;
