@@ -146,6 +146,7 @@ export const CellsProvider = ({ children }: ICellsProviderProps) => {
   }
   function saveCells(title: string) {
     const newProject: IPropsProjects = { title, state: cells, size };
+    showMessage("save");
     if (localStorage.projects) {
       const projects = JSON.parse(localStorage.projects) as IPropsProjects[];
       const projectSearch = projects.find((project, index) => {
@@ -159,7 +160,6 @@ export const CellsProvider = ({ children }: ICellsProviderProps) => {
         projects.push(newProject);
       }
       localStorage.projects = JSON.stringify(projects);
-      showMessage("save");
       return;
     }
 
@@ -167,7 +167,7 @@ export const CellsProvider = ({ children }: ICellsProviderProps) => {
     localStorage.projects = JSON.stringify([{ ...newProject }]);
   }
 
-  function showMessage(type) {
+  function showMessage(type: string) {
     switch (type) {
       case "save":
         setMessage("Salvo com sucesso!");
