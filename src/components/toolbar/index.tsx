@@ -4,13 +4,13 @@ import styles from "./styles.module.css";
 import { ToolbarItem } from "./toolbarItem";
 
 export const Toolbar = () => {
-  const { size } = React.useContext(CellsContext);
+  const { size, isEdit } = React.useContext(CellsContext);
   return (
     <div className={styles.toolbar}>
       <ToolbarItem type="draw" img={"./draw.svg"} />
       <ToolbarItem type="erase" img={"./erase_dark.svg"} />
 
-      <ToolbarItem type="size" text={`${size}`} toolCustom disabled />
+      <ToolbarItem type="size" text={`${size}`} toolCustom disabled={isEdit} />
       <ToolbarItem
         type="grid"
         img="/grid_on.svg"

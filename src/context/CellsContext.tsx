@@ -17,6 +17,7 @@ interface ICellsContext {
   resetCells: () => void;
   saveCells: (title: string) => void;
   message: string;
+  isEdit: boolean;
 }
 
 interface IPropsProjects {
@@ -181,6 +182,7 @@ export const CellsProvider = ({ children }: ICellsProviderProps) => {
   return (
     <CellsContext.Provider
       value={{
+        isEdit,
         message,
         cells,
         zoom,
