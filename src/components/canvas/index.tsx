@@ -3,7 +3,6 @@ import { CanvasContext } from "../../context/CanvasContext";
 import { CellsContext } from "../../context/CellsContext";
 import { ColorsContext } from "../../context/ColorsContext";
 import { ToolBarContext } from "../../context/ToolBarContext";
-import { Cell } from "../cell";
 import styles from "./styles.module.css";
 
 interface IPropsTable {
