@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+import { CanvasContext } from "./CanvasContext";
 import { CellsContext } from "./CellsContext";
 import { ColorsContext } from "./ColorsContext";
 
@@ -8,10 +9,13 @@ interface IToolBarProviderProps {
 
 interface IToolBarContext {
   tool: string;
-  gridOn: boolean;
   toolCustomActive: string[];
   changeTool: (type: string) => void;
-  useTool: (e: React.MouseEvent, id: string, otherTool?: string) => void;
+  useTool: (
+    e: React.MouseEvent,
+    coordinates?: { x: number; y: number },
+    otherTool?: string
+  ) => void;
 }
 
 export const ToolBarContext = React.createContext({} as IToolBarContext);
@@ -19,11 +23,10 @@ export const ToolBarContext = React.createContext({} as IToolBarContext);
 export const ToolBarProvider = ({ children }: IToolBarProviderProps) => {
   const [tool, setTool] = React.useState("draw" as string);
   const { erase, paint } = React.useContext(ColorsContext);
-  const { changeSize, resetCells, saveCells } = React.useContext(CellsContext);
+  const { changeSize, resetCells, saveCells } = React.useContext(CanvasContext);
   const [toolCustomActive, setToolCustomActive] = React.useState(
     {} as string[]
   );
-  const [gridOn, setGridOn] = React.useState(true);
 
   const tools = {
     draw: "draw",
@@ -34,41 +37,33 @@ export const ToolBarProvider = ({ children }: IToolBarProviderProps) => {
   function changeTool(type: string) {
     setTool(tools[type]);
   }
-  function useTool(e: React.MouseEvent, id: string, otherTool?: string) {
+  function useTool(
+    e: React.MouseEvent,
+    coordinates: { x: number; y: number },
+    otherTool?: string
+  ) {
     switch (otherTool || tool) {
       case "draw":
-        paint(e, id);
+        paint(e, coordinates);
         break;
       case "erase":
-        erase(e, id);
-        break;
-      case "grid":
-        handleGrid(otherTool);
+        erase(e, coordinates);
         break;
       case "size":
         changeSize();
         break;
-      case "save":
-        saveCells("test");
-        break;
       case "clean":
         confirm("Isso irá limpar a tela, tem certeza?") && resetCells();
         break;
+      case "save":
+        saveCells();
+        break;
     }
-  }
-  function handleGrid(otherTool) {
-    setToolCustomActive(
-      gridOn
-        ? { ...toolCustomActive, [otherTool]: otherTool }
-        : { ...toolCustomActive, [otherTool]: "" }
-    );
-    setGridOn(!gridOn);
   }
   return (
     <ToolBarContext.Provider
       value={{
         tool,
-        gridOn,
         toolCustomActive,
         changeTool,
         useTool,

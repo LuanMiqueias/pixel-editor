@@ -1,7 +1,9 @@
-.table{
+.canvas{
   display: grid;
   box-shadow: 0 0 30px rgba(0, 0, 0, 0.2);
   overflow: hidden;
+  background:#505050;
+  cursor: crosshair;
 }
 
 .animation_show{

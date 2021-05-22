@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+import { CanvasContext } from "./CanvasContext";
 import { CellsContext } from "./CellsContext";
 
 interface IColorsProviderProps {
@@ -9,8 +10,8 @@ interface IColorsProps {
   color: string;
   mouseOver: boolean;
   changeColor: (color: string) => void;
-  erase?: (e: React.MouseEvent, id: string) => void;
-  paint: (e: React.MouseEvent, id: string) => void;
+  erase?: (e: React.MouseEvent, coordinates: { x: number; y: number }) => void;
+  paint: (e: React.MouseEvent, coordinates: { x: number; y: number }) => void;
   setMouseOver: React.Dispatch<React.SetStateAction<boolean>>;
   handlePickedColor: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
@@ -20,26 +21,26 @@ export const ColorsContext = React.createContext({} as IColorsProps);
 export const ColorsProvider = ({ children }: IColorsProviderProps) => {
   const [color, setColor] = React.useState("#FFFFFF");
   const [mouseOver, setMouseOver] = React.useState(false);
-  const { paintCell, eraseCell } = React.useContext(CellsContext);
+  const { paintCell, eraseCell } = React.useContext(CanvasContext);
 
   function changeColor(color) {
     setColor(color);
   }
 
-  function paint(e: React.MouseEvent, id: string) {
+  function paint(e: React.MouseEvent, coordinates: { x: number; y: number }) {
     e.preventDefault();
-    if (e.type === "mouseover") {
-      return mouseOver && paintCell(id, color);
+    if (e.type === "mousemove") {
+      return mouseOver && paintCell(coordinates, color);
     } else {
-      paintCell(id, color);
+      paintCell(coordinates, color);
     }
   }
-  function erase(e: React.MouseEvent, id: string) {
+  function erase(e: React.MouseEvent, coordinates: { x: number; y: number }) {
     e.preventDefault();
-    if (e.type === "mouseover") {
-      return mouseOver && eraseCell(id);
+    if (e.type === "mousemove") {
+      return mouseOver && eraseCell(coordinates);
     } else {
-      eraseCell(id);
+      eraseCell(coordinates);
     }
   }
   function handlePickedColor(e: React.ChangeEvent<HTMLInputElement>) {
