@@ -1,6 +1,5 @@
 import React, { ReactNode } from "react";
 import { CanvasContext } from "./CanvasContext";
-import { CellsContext } from "./CellsContext";
 
 interface IColorsProviderProps {
   children: React.ReactNode;

@@ -11,33 +11,74 @@ interface ICanvasProviderProps {
 
 interface ICanvasContext {
   size: number;
-  message: string;
+  message: { message: string; type: string };
+  grid: boolean;
   changeSize: () => void;
   resetCells: () => void;
   paintCell: (coordinates: { x: number; y: number }, color: string) => void;
   eraseCell: (coordinates: { x: number; y: number }) => void;
-  initCanvas: (canvas: React.RefObject<HTMLCanvasElement>) => void;
+  changeGrid: () => void;
+  initCanvas: (
+    canvas: React.RefObject<HTMLCanvasElement>,
+    grid: React.RefObject<HTMLCanvasElement>
+  ) => void;
   saveCells: () => void;
 }
 
 export const CanvasContext = React.createContext({} as ICanvasContext);
 
 export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
-  let ctx: CanvasRenderingContext2D = null;
-  let canvas: HTMLCanvasElement = null;
-  let sizeCell = 0;
-  let canvasSize = 0;
-
   const [size, setSize] = React.useState(16);
-  const [message, setMessage] = React.useState("");
+  const [message, setMessage] = React.useState({
+    message: "",
+    type: "default",
+  });
+  const [grid, setGrid] = React.useState(true);
+  const [canvasConfig, setCanvasConfig] = React.useState({
+    canvas: null as HTMLCanvasElement,
+    ctx: null as CanvasRenderingContext2D,
+    rect: null,
+    sizeCell: 0,
+    canvasSize: 0,
+  });
+  const [canvasGrid, setcanvasGrid] = React.useState({
+    canvas: null as HTMLCanvasElement,
+    ctx: null as CanvasRenderingContext2D,
+    rect: null,
+    sizeCell: 0,
+    canvasSize: 0,
+  });
 
-  function initCanvas(canvasRef: React.RefObject<HTMLCanvasElement>) {
-    canvas = canvasRef.current; //ref canvas
+  React.useEffect(() => {
+    canvasGrid.canvas && initGrid();
+  }, [canvasConfig]);
 
-    canvasSize = canvas.width;
-    sizeCell = Math.floor(canvasSize / size);
-    ctx = canvas.getContext("2d");
-    makeGrid();
+  React.useEffect(() => {
+    const newSize = {
+      ...canvasConfig,
+      sizeCell: Math.floor(canvasConfig.canvasSize / size),
+    };
+    canvasConfig.canvas && setCanvasConfig(newSize);
+  }, [size]);
+
+  function initCanvas(
+    canvasRef: React.RefObject<HTMLCanvasElement>,
+    grid: React.RefObject<HTMLCanvasElement>
+  ) {
+    setCanvasConfig({
+      ctx: canvasRef.current.getContext("2d"),
+      canvas: canvasRef.current, //ref canvas
+      rect: canvasRef.current.getBoundingClientRect(),
+      canvasSize: canvasRef.current.width,
+      sizeCell: Math.floor(canvasRef.current.width / size),
+    });
+    setcanvasGrid({
+      ctx: grid.current.getContext("2d"),
+      canvas: grid.current, //ref canvas
+      rect: grid.current.getBoundingClientRect(),
+      canvasSize: grid.current.width,
+      sizeCell: Math.floor(grid.current.width / size),
+    });
   }
 
   function changeSize() {
@@ -53,70 +94,168 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
         break;
     }
   }
+
   function paintCell(coordinates: { x: number; y: number }, color: string) {
+    if (!canvasConfig.canvas) {
+      console.log(canvasConfig);
+      showMessage("error");
+      return;
+    }
+
+    getCordinatesPixel(coordinates);
     const { x, y } = getCordinatesPixel(coordinates);
 
-    ctx.fillStyle = color;
-    ctx.fillRect(x, y, sizeCell - 2, sizeCell - 2);
-    ctx.save();
+    canvasConfig.ctx.fillStyle = color;
+    canvasConfig.ctx.fillRect(
+      x,
+      y,
+      canvasConfig.sizeCell,
+      canvasConfig.sizeCell
+    );
+    canvasConfig.ctx.save();
   }
 
   function eraseCell(coordinates: { x: number; y: number }) {
+    if (!canvasConfig.canvas) {
+      showMessage("error");
+      return;
+    }
+
     const { x, y } = getCordinatesPixel(coordinates);
-    ctx.clearRect(x, y, sizeCell - 2, sizeCell - 2);
+    canvasConfig.ctx.clearRect(
+      x,
+      y,
+      canvasConfig.sizeCell,
+      canvasConfig.sizeCell
+    );
   }
 
   function getCordinatesPixel(coordinates: { x: number; y: number }) {
-    let rect = canvas.getBoundingClientRect();
+    if (!canvasConfig.canvas) {
+      showMessage("error");
+      return;
+    }
 
-    let x = coordinates.x - rect.left;
-    let y = coordinates.y - rect.top;
+    let x = coordinates.x - canvasConfig.rect.left;
+    let y = coordinates.y - canvasConfig.rect.top;
 
-    x = Math.floor(Math.floor(x * (size / canvasSize)) * sizeCell) + 1;
-    y = Math.floor(Math.floor(y * (size / canvasSize)) * sizeCell) + 1;
+    x = Math.floor(
+      Math.floor(x * (size / canvasConfig.canvasSize)) * canvasConfig.sizeCell
+    );
+    y = Math.floor(
+      Math.floor(y * (size / canvasConfig.canvasSize)) * canvasConfig.sizeCell
+    );
 
     return { x, y };
   }
   function resetCells() {
-    makeGrid();
-  }
-  function saveCells() {}
-  function showMessage(type: string) {
-    switch (type) {
-      case "save":
-        setMessage("Salvo com sucesso!");
-        break;
-      default:
-        setMessage("Sucesso!");
+    if (!canvasConfig.canvas) {
+      showMessage("error");
+      return;
     }
+
+    canvasConfig.ctx.clearRect(
+      0,
+      0,
+      canvasConfig.canvasSize,
+      canvasConfig.canvasSize
+    );
+  }
+  function saveCells() {
+    showMessage("save");
+  }
+  function showMessage(
+    type: "save" | "error" | "waring",
+    customMessage?: string
+  ) {
+    const messages = {
+      initial: { message: "", type: "default" },
+      save: { message: "Salvo com sucesso!", type: "sucess" },
+      error: { message: "Tente novamente mais tarde", type: "error" },
+      waring: { message: "Tente novamente mais tarde", type: "waring" },
+    };
+    if (customMessage) {
+      setMessage({
+        message: customMessage,
+        type: messages[type].type,
+      });
+    } else {
+      setMessage(messages[type]);
+    }
+
     setTimeout(() => {
-      setMessage("");
+      setMessage(messages.initial);
     }, 2500);
   }
 
-  // Internal functions
-  function makeGrid(image?: string) {
-    ctx.clearRect(0, 0, canvasSize, canvasSize);
-    ctx.strokeStyle = "#404040";
+  function changeGrid() {
+    grid ? clearGrid() : drawGrid();
+    setGrid(!grid);
+  }
 
-    for (let i = sizeCell; i < canvasSize; i += sizeCell) {
-      drawLine(i, 0, i, canvasSize);
+  // Internal functions
+  function initGrid(image?: string) {
+    if (!canvasGrid.canvas) {
+      showMessage("error");
+      return;
     }
-    for (let i = sizeCell; i < canvasSize; i += sizeCell) {
-      drawLine(0, i, canvasSize, i);
+
+    clearGrid();
+    clearCanvas();
+    drawGrid();
+  }
+  function drawGrid() {
+    canvasGrid.ctx.strokeStyle = "#404040";
+
+    for (
+      let i = canvasGrid.sizeCell;
+      i < canvasGrid.canvasSize;
+      i += canvasGrid.sizeCell
+    ) {
+      drawLine(i, 0, i, canvasGrid.canvasSize);
+    }
+    for (
+      let i = canvasGrid.sizeCell;
+      i < canvasGrid.canvasSize;
+      i += canvasGrid.sizeCell
+    ) {
+      drawLine(0, i, canvasGrid.canvasSize, i);
     }
   }
+  function clearGrid() {
+    canvasGrid.ctx.clearRect(
+      0,
+      0,
+      canvasGrid.canvasSize,
+      canvasGrid.canvasSize
+    );
+  }
+  function clearCanvas() {
+    canvasConfig.ctx.clearRect(
+      0,
+      0,
+      canvasConfig.canvasSize,
+      canvasConfig.canvasSize
+    );
+  }
   function drawLine(x1: number, y1: number, x2: number, y2: number) {
-    ctx.beginPath();
-    ctx.moveTo(x1, y1);
-    ctx.lineTo(x2, y2);
-    ctx.stroke();
+    if (!canvasGrid.canvas) {
+      showMessage("error");
+      return;
+    }
+
+    canvasGrid.ctx.beginPath();
+    canvasGrid.ctx.moveTo(x1, y1);
+    canvasGrid.ctx.lineTo(x2, y2);
+    canvasGrid.ctx.stroke();
   }
   return (
     <CanvasContext.Provider
       value={{
         message,
         size,
+        grid,
+        changeGrid,
         changeSize,
         paintCell,
         eraseCell,

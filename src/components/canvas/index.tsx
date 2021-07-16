@@ -1,6 +1,5 @@
 import React from "react";
 import { CanvasContext } from "../../context/CanvasContext";
-import { CellsContext } from "../../context/CellsContext";
 import { ColorsContext } from "../../context/ColorsContext";
 import { ToolBarContext } from "../../context/ToolBarContext";
 import styles from "./styles.module.css";
@@ -15,25 +14,38 @@ export const Table = () => {
   const { useTool } = React.useContext(ToolBarContext);
 
   const canvas: React.RefObject<HTMLCanvasElement> = React.createRef();
+  const grid: React.RefObject<HTMLCanvasElement> = React.createRef();
 
   React.useEffect(() => {
-    initCanvas(canvas);
+    initCanvas(canvas, grid);
   }, [size]);
 
   function handleMouse(e: React.MouseEvent<HTMLCanvasElement, MouseEvent>) {
     const coordinates = { x: e.clientX, y: e.clientY };
-    useTool(e, coordinates);
+    useTool({ e, coordinates, toolType: "" });
   }
   return (
-    <canvas
-      className={`${styles.canvas}`}
-      onMouseUp={() => setMouseOver(false)}
-      onMouseDown={() => setMouseOver(true)}
-      onMouseMove={(e) => handleMouse(e)}
-      onClick={(e) => handleMouse(e)}
-      ref={canvas}
-      height="512px"
-      width="512px"
-    />
+    <div className={styles.container}>
+      <canvas
+        className={`${styles.canvas}`}
+        onMouseUp={() => setMouseOver(false)}
+        onMouseDown={() => setMouseOver(true)}
+        onMouseMove={(e) => handleMouse(e)}
+        onClick={(e) => handleMouse(e)}
+        ref={canvas}
+        height="512px"
+        width="512px"
+      />
+      <canvas
+        className={`${styles.canvas_grid}`}
+        onMouseUp={() => setMouseOver(false)}
+        onMouseDown={() => setMouseOver(true)}
+        onMouseMove={(e) => handleMouse(e)}
+        onClick={(e) => handleMouse(e)}
+        ref={grid}
+        height="512px"
+        width="512px"
+      />
+    </div>
   );
 };

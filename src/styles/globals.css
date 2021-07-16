@@ -16,3 +16,10 @@ a {
 * {
   box-sizing: border-box;
 }
+
+:root{
+  --message-default:#11c7ff;
+  --message-sucess:rgb(84, 223, 146);
+  --message-error:rgb(221, 30, 40);
+  --message-waring:rgb(212, 201, 40);
+}

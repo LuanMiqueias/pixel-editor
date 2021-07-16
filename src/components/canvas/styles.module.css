@@ -4,6 +4,8 @@
   overflow: hidden;
   background:#505050;
   cursor: crosshair;
+
+  z-index: -1;
 }
 
 .animation_show{
@@ -17,4 +19,15 @@
     opacity: initial;
     transform: initial;
   }
+}
+.container{
+  position: relative;
+}
+.canvas_grid{
+  position: absolute;
+  top:0;
+  left:0;
+  width: 100%;
+  height:100%;
+  z-index: 100;
 }

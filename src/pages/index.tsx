@@ -4,7 +4,6 @@ import { ColorPalette } from "../components/colorPalette";
 import { Table } from "../components/canvas";
 import { Toolbar } from "../components/toolbar";
 import { WarningScreen } from "../components/warning-screen";
-import { CellsProvider } from "../context/CellsContext";
 import { ColorsProvider } from "../context/ColorsContext";
 import { ToolBarProvider } from "../context/ToolBarContext";
 
@@ -21,7 +20,6 @@ export default function Home() {
         <img src="./logo.svg" alt="" /> <span>Não se esqueça de salvar</span>
       </h1>
       <CanvasProvider>
-        <CellsProvider>
           <ColorsProvider>
             <ToolBarProvider>
               <main className={styles.content}>
@@ -34,7 +32,6 @@ export default function Home() {
               </main>
             </ToolBarProvider>
           </ColorsProvider>
-        </CellsProvider>
       </CanvasProvider>
     </div>
   );
