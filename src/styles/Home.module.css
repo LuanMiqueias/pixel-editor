@@ -1,40 +1,94 @@
-@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;500&display=swap');
-
-.container {
+.container{
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   background-color: #202020;
   overflow: hidden;
 }
-.container h1{
+
+.container main{
+  flex:1;
   display:flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  font-size: 1rem;
+  gap:32px;
+
+  animation:  var(--animation-show);
 }
-.container h1 span{
-  padding: 0.45rem 0;
-  color:#606060;
-  font-weight: 400;
-  font-family: 'Josefin Sans', sans-serif;
-}
-.content {
-  max-width: 880px;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
+.title{
+  display:flex;
   align-items: center;
-  gap:24px;
+  justify-content: center;
+  flex-direction: column;
+  gap:12px;
+  color:var(--text-light);
+  font-weight: 300;
+
+  animation:  var(--animation-show);
+  /* transform: translateY(-100px); */
 }
-.conatiner_table{
-  width:512px; 
-  height:512px; 
+.title h1{
+  font-weight: 500;
+  font-family: 'Press Start 2P', cursive;
+  color:var(--primary-color);
+  margin: 0;
+  letter-spacing: -2px;
+}
+.title p{
+  margin: 0;
+}
+.title h1 span{
+  font-family: inherit;
+  color:var(--title-light)
+}
+.btn_start{
+  width: 100%;
+  max-width: 200px;
+
+  transition: all .4s;
+
+  animation:  var(--animation-show);
+  /* transform: translateY(100px); */
+}
+.btn_start a{
+  padding: 16px 44px;
+  padding-top: 18px;
+  border-radius: 5px;
+  background: var(--primary-color);
+
+  font-family: 'Press Start 2P', cursive;
+  color:var(--text-light);
+  font-size: .88rem;
+  letter-spacing: .05rem;
+
   display:flex;
   align-items: center;
   justify-content: center;
 }
+.btn_start:hover{
+  transition: all .1s;
+  max-width: 250px;
+}
+
+.container footer{
+  animation: var(--animation-show);
+}
+.container footer p{
+  font-weight: 00;
+  display: flex;
+  gap:6px;
+  color:var(--text-light)
+}
+.container footer a{
+  color:var(--link)
+}
+
+/* @keyframes show {
+  to{
+    opacity: 1;
+    transform: initial;
+  }
+} */

@@ -30,7 +30,9 @@ export const ToolbarItem = ({
   }
   return (
     <div
-      className={`${styles.item} ${type === toolSeleted && styles.item_active}`}
+      className={`${styles.item} ${
+        type === toolSeleted && styles.item_active
+      } animation_show_top`}
       onClick={() => handleClick()}
     >
       {img ? (

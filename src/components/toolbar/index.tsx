@@ -6,7 +6,7 @@ import { ToolbarItem } from "./toolbarItem";
 export const Toolbar = () => {
   const { size, grid } = React.useContext(CanvasContext);
   return (
-    <div className={styles.toolbar}>
+    <div className={`${styles.toolbar} animation_show_opacity`}>
       <ToolbarItem type="draw" img={"./draw.svg"} />
       <ToolbarItem type="erase" img={"./erase_dark.svg"} />
 

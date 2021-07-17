@@ -18,7 +18,7 @@ export const ColorPalette = () => {
     "#371383",
   ];
   return (
-    <div className={`${styles.palette}`}>
+    <div className={`${styles.palette} animation_show_opacity`}>
       <Color color="pick-color" />
       {colors.map((color, index) => (
         <Color color={color} key={`color_${color}_${index}`} />

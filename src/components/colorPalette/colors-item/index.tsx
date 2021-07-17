@@ -17,7 +17,7 @@ export const Color = ({ color }: IPropsToolBarItem) => {
     <>
       {color === "pick-color" ? (
         <label
-          className={`${styles.pick_color}`}
+          className={`${styles.pick_color} animation_show_top`}
           style={{ background: colorSelect }}
           htmlFor="pick-color"
           onClick={() => changeTool("draw")}
@@ -31,7 +31,7 @@ export const Color = ({ color }: IPropsToolBarItem) => {
         </label>
       ) : (
         <div
-          className={styles.item}
+          className={`${styles.item} animation_show_top`}
           style={{ background: color }}
           onClick={() => {
             changeColor(color);

@@ -15,11 +15,76 @@ a {
 
 * {
   box-sizing: border-box;
+  font-family: 'Josefin Sans', sans-serif;
 }
 
 :root{
+  --primary-color:#DD2929;
+  --primary-color-hover:#c01f1f;
+
+
+  --title-light:#fff;
+  --text-light:#F5F5F5;
+  --link:#4574A0;
+
+  --animation-show:show forwards .3s;
+
   --message-default:#11c7ff;
   --message-sucess:rgb(84, 223, 146);
   --message-error:rgb(221, 30, 40);
   --message-waring:rgb(212, 201, 40);
+}
+
+@keyframes show {
+  to{
+    opacity: 1;
+    transform: initial;
+  }
+}
+
+.animation_show_top{
+  opacity: 0;
+  transform: translateY(-50%);
+
+  animation: var(--animation-show);
+  animation-delay: .1s;
+
+}
+.animation_show_bottom{
+  opacity: 0;
+  transform: translateY(50%);
+
+  animation: var(--animation-show);
+  animation-delay: .2s;
+}
+.animation_show_opacity{
+  opacity: 0;
+  animation: var(--animation-show);
+}
+
+.github_link{
+  position: absolute;
+  top:0;
+  right: 0;
+  margin:24px 32px;
+
+  transition: all .2s;
+  
+  opacity: 0;
+  transform: translateY(-20px);
+  animation: var(--animation-show);
+}
+
+.github_link:hover{
+  transition: all .1s;
+  opacity: .8 !important;
+  transform: scale(1.1) !important;
+}
+
+
+@keyframes show {
+  to{
+    opacity: 1;
+    transform: initial;
+  }
 }
