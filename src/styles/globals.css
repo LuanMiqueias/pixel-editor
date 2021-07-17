@@ -28,6 +28,7 @@ a {
   --link:#4574A0;
 
   --animation-show:show forwards .3s;
+  --menu-item-active:#298ec9;
 
   --menu-item-default:rgba(255, 255, 255, 0.2);
   

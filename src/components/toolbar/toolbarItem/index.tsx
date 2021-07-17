@@ -7,6 +7,7 @@ interface IPropsToolBarItem {
   img?: string;
   text?: string;
   hover?: string;
+  maxWidth?: string;
   disabled?: boolean;
   isClickable?: boolean;
   isActive?: boolean;
@@ -17,6 +18,7 @@ export const ToolbarItem = ({
   text,
   hover,
   isActive,
+  maxWidth,
   disabled,
   isClickable = false,
 }: IPropsToolBarItem) => {
@@ -37,9 +39,17 @@ export const ToolbarItem = ({
     >
       {img ? (
         type === toolSeleted || isActive ? (
-          <img src={hover ? hover : img} alt={type} />
+          <img
+            src={hover ? hover : img}
+            alt={type}
+            style={maxWidth && { maxWidth: maxWidth }}
+          />
         ) : (
-          <img src={img} alt={type} />
+          <img
+            src={img}
+            alt={type}
+            style={maxWidth && { maxWidth: maxWidth }}
+          />
         )
       ) : (
         <div className={styles.text}>

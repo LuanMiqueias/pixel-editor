@@ -23,8 +23,14 @@ export const ToolBarProvider = ({ children }: IToolBarProviderProps) => {
   const [toolCliked, setToolCliked] = React.useState("" as string);
 
   const { erase, paint } = React.useContext(ColorsContext);
-  const { changeMenu, changeSize, resetCells, saveCells, changeGrid } =
-    React.useContext(CanvasContext);
+  const {
+    toogleMenuToolbar,
+    changeSize,
+    resetCells,
+    saveCells,
+    changeGrid,
+    changeSizePixel,
+  } = React.useContext(CanvasContext);
 
   const tools = {
     toolsSelectable: {
@@ -42,7 +48,11 @@ export const ToolBarProvider = ({ children }: IToolBarProviderProps) => {
     toolsClickable: {
       menu: {
         name: "menu",
-        init: () => changeMenu(),
+        init: () => toogleMenuToolbar("main"),
+      },
+      sizePixel: {
+        name: "sizePixel",
+        init: () => toogleMenuToolbar("sizePixel"),
       },
       grid: {
         name: "grid",

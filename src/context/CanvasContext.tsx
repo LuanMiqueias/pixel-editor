@@ -1,4 +1,6 @@
 import React from "react";
+import { NavMainToolbar } from "../components/menu/navMainToolbar";
+import { NavPincel } from "../components/menu/NavPincel";
 
 interface IPropsProjects {
   title: string;
@@ -15,7 +17,22 @@ interface ICanvasContext {
   grid: boolean;
   menu: boolean;
   preview: string;
-  changeMenu: () => void;
+  navsToolbar: {
+    activeCurrent: string;
+    navs: {
+      sizePixel: {
+        name: string;
+        content: React.ReactNode;
+      };
+      main: {
+        name: string;
+        content: React.ReactNode;
+      };
+    };
+  };
+  sizePixel: number;
+  toogleMenuToolbar: (name: string) => void;
+  changeSizePixel: (value: number) => void;
   changeSize: () => void;
   resetCells: () => void;
   paintCell: (coordinates: { x: number; y: number }, color: string) => void;
@@ -33,6 +50,21 @@ export const CanvasContext = React.createContext({} as ICanvasContext);
 export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
   const [preview, setPreview] = React.useState("");
   const [size, setSize] = React.useState(16);
+  const [sizePixel, setSizePixel] = React.useState(1);
+
+  const [navsToolbar, setNavsToolbar] = React.useState({
+    activeCurrent: "",
+    navs: {
+      sizePixel: {
+        name: "sizePixel",
+        content: <NavPincel />,
+      },
+      main: {
+        name: "main",
+        content: <NavMainToolbar />,
+      },
+    },
+  });
   const [menu, setMenu] = React.useState(false);
   const [message, setMessage] = React.useState({
     message: "",
@@ -94,9 +126,6 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
     });
   }
 
-  function changeMenu() {
-    setMenu(!menu);
-  }
   function changeSize() {
     switch (size) {
       case 8:
@@ -113,6 +142,28 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
         break;
     }
   }
+  function toogleMenuToolbar(name: string) {
+    if (!navsToolbar.navs[name]) return;
+
+    if (navsToolbar.activeCurrent === name) {
+      setNavsToolbar({
+        ...navsToolbar,
+        activeCurrent: "",
+      });
+    } else {
+      setNavsToolbar({
+        ...navsToolbar,
+        activeCurrent: name,
+      });
+    }
+  }
+  function changeSizePixel(value) {
+    setSizePixel(value);
+    setNavsToolbar({
+      ...navsToolbar,
+      activeCurrent: "",
+    });
+  }
 
   function paintCell(coordinates: { x: number; y: number }, color: string) {
     if (!canvasConfig.canvas) {
@@ -127,8 +178,8 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
     canvasConfig.ctx.fillRect(
       x,
       y,
-      canvasConfig.sizeCell,
-      canvasConfig.sizeCell
+      canvasConfig.sizeCell * sizePixel,
+      canvasConfig.sizeCell * sizePixel
     );
     save();
   }
@@ -143,8 +194,8 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
     canvasConfig.ctx.clearRect(
       x,
       y,
-      canvasConfig.sizeCell,
-      canvasConfig.sizeCell
+      canvasConfig.sizeCell * sizePixel,
+      canvasConfig.sizeCell * sizePixel
     );
     save();
   }
@@ -155,8 +206,14 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
       return;
     }
 
-    let x = coordinates.x - canvasConfig.rect.left;
-    let y = coordinates.y - canvasConfig.rect.top;
+    let x =
+      coordinates.x -
+      canvasConfig.sizeCell * (sizePixel / 2) -
+      canvasConfig.rect.left;
+    let y =
+      coordinates.y -
+      canvasConfig.sizeCell * (sizePixel / 2) -
+      canvasConfig.rect.top;
 
     x = Math.floor(
       Math.floor(x * (size / canvasConfig.canvasSize)) * canvasConfig.sizeCell
@@ -274,13 +331,16 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
   return (
     <CanvasContext.Provider
       value={{
+        sizePixel,
+        navsToolbar,
         message,
         size,
         grid,
         menu,
         preview,
-        changeMenu,
+        toogleMenuToolbar,
         changeGrid,
+        changeSizePixel,
         changeSize,
         paintCell,
         eraseCell,
