@@ -14,6 +14,8 @@
 .toolbar{
   display: flex;
   flex-direction: column;
+  flex-wrap: wrap;
+  max-height: 550px;
   gap:8px;
   z-index: 10;
   position: relative;

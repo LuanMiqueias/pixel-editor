@@ -14,6 +14,7 @@ interface ICanvasContext {
   message: { message: string; type: string };
   grid: boolean;
   menu: boolean;
+  preview: string;
   changeMenu: () => void;
   changeSize: () => void;
   resetCells: () => void;
@@ -30,6 +31,7 @@ interface ICanvasContext {
 export const CanvasContext = React.createContext({} as ICanvasContext);
 
 export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
+  const [preview, setPreview] = React.useState("");
   const [size, setSize] = React.useState(16);
   const [menu, setMenu] = React.useState(false);
   const [message, setMessage] = React.useState({
@@ -51,6 +53,14 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
     sizeCell: 0,
     canvasSize: 0,
   });
+
+  React.useEffect(() => {
+    if (!canvasConfig.canvas) return;
+  }, [paintCell, changeSize, canvasConfig]);
+
+  const save = React.useCallback(() => {
+    setPreview(canvasConfig.canvas.toDataURL());
+  }, [paintCell, changeSize, eraseCell, initCanvas]);
 
   React.useEffect(() => {
     canvasGrid.canvas && initGrid();
@@ -96,6 +106,9 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
         setSize(32);
         break;
       case 32:
+        setSize(64);
+        break;
+      case 64:
         setSize(8);
         break;
     }
@@ -103,7 +116,6 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
 
   function paintCell(coordinates: { x: number; y: number }, color: string) {
     if (!canvasConfig.canvas) {
-      console.log(canvasConfig);
       showMessage("error");
       return;
     }
@@ -118,7 +130,7 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
       canvasConfig.sizeCell,
       canvasConfig.sizeCell
     );
-    canvasConfig.ctx.save();
+    save();
   }
 
   function eraseCell(coordinates: { x: number; y: number }) {
@@ -134,6 +146,7 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
       canvasConfig.sizeCell,
       canvasConfig.sizeCell
     );
+    save();
   }
 
   function getCordinatesPixel(coordinates: { x: number; y: number }) {
@@ -151,7 +164,6 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
     y = Math.floor(
       Math.floor(y * (size / canvasConfig.canvasSize)) * canvasConfig.sizeCell
     );
-
     return { x, y };
   }
   function resetCells() {
@@ -166,6 +178,7 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
       canvasConfig.canvasSize,
       canvasConfig.canvasSize
     );
+    save();
   }
   function saveCells() {
     showMessage("save");
@@ -209,6 +222,7 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
     clearGrid();
     clearCanvas();
     drawGrid();
+    save();
   }
   function drawGrid() {
     canvasGrid.ctx.strokeStyle = "#404040";
@@ -243,6 +257,7 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
       canvasConfig.canvasSize,
       canvasConfig.canvasSize
     );
+    save();
   }
   function drawLine(x1: number, y1: number, x2: number, y2: number) {
     if (!canvasGrid.canvas) {
@@ -255,6 +270,7 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
     canvasGrid.ctx.lineTo(x2, y2);
     canvasGrid.ctx.stroke();
   }
+
   return (
     <CanvasContext.Provider
       value={{
@@ -262,6 +278,7 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
         size,
         grid,
         menu,
+        preview,
         changeMenu,
         changeGrid,
         changeSize,

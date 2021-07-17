@@ -9,6 +9,7 @@ import { ToolBarProvider } from "../context/ToolBarContext";
 
 import styles from "../styles/Editor.module.css";
 import { CanvasContext, CanvasProvider } from "../context/CanvasContext";
+import { Preview } from "../components/preview";
 
 export default function Home() {
   return (
@@ -36,6 +37,7 @@ export default function Home() {
                 <Table />
               </div>
               <Toolbar />
+              <Preview />
             </main>
           </ToolBarProvider>
         </ColorsProvider>

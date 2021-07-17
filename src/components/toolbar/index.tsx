@@ -30,7 +30,6 @@ export const Toolbar = () => {
       <ToolbarItem type="size" text={`${size}`} isClickable />
       <ToolbarItem type="save" img={"./save.svg"} isClickable />
       <ToolbarItem type="clean" img={"./clean.svg"} isClickable />
-
       <Menu />
     </div>
   );

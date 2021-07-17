@@ -52,6 +52,7 @@
   font-size: 1.25rem;
   color:var(--primary-color)
 }
+
 @media (max-width:675px){
   .content,
   .container h1 span{
