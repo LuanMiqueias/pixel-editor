@@ -38,3 +38,26 @@
   align-items: center;
   justify-content: center;
 }
+.moblie_waring{
+  display: none;
+  color:#fff;
+  font-weight: 500;
+  font-size: .88rem;
+  text-align: center;
+  max-width: 85%;
+  line-height: 1.5;
+
+}
+.moblie_waring span{
+  font-size: 1.25rem;
+  color:var(--primary-color)
+}
+@media (max-width:675px){
+  .content,
+  .container h1 span{
+    display: none;
+  }
+  .moblie_waring{
+    display: initial;
+  }
+}

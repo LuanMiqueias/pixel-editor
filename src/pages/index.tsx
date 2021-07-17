@@ -21,13 +21,15 @@ export default function Home() {
           <p>Crie pixel arts incriveis</p>
         </div>
         <div className={`${styles.btn_start} animation_show_bottom`}>
-          <Link href="/editor">START</Link>
+          <Link href="/create">START</Link>
         </div>
       </main>
       <footer className="animation_show_bottom">
         <p>
           Desenvolvido com <img src="/heart.svg" alt="" /> por
-          <a href="#">Luan Miqueias</a>
+          <a href="https://luanmiqueias.com.br/" target="_blank">
+            Luan Miqueias
+          </a>
         </p>
       </footer>
     </div>

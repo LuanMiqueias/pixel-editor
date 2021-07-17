@@ -9,6 +9,8 @@
   align-items: center;
   justify-content: center;
   transition: all .1s;
+
+  user-select: none;
 }
 .item:hover{
   transition: all .05s;

@@ -23,6 +23,9 @@ export default function Home() {
       <h1 className={`animation_show_top`}>
         <img src="./logo.svg" alt="" /> <span>Não se esqueça de salvar</span>
       </h1>
+      <h2 className={styles.moblie_waring}>
+        Não há suporte para telas menores que <br /> <span>768px</span>
+      </h2>
       <CanvasProvider>
         <ColorsProvider>
           <ToolBarProvider>
