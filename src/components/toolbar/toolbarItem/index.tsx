@@ -37,9 +37,9 @@ export const ToolbarItem = ({
     >
       {img ? (
         type === toolSeleted || isActive ? (
-          <img src={img} alt={type} />
-        ) : (
           <img src={hover ? hover : img} alt={type} />
+        ) : (
+          <img src={img} alt={type} />
         )
       ) : (
         <div className={styles.text}>

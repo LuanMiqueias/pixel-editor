@@ -13,6 +13,8 @@ interface ICanvasContext {
   size: number;
   message: { message: string; type: string };
   grid: boolean;
+  menu: boolean;
+  changeMenu: () => void;
   changeSize: () => void;
   resetCells: () => void;
   paintCell: (coordinates: { x: number; y: number }, color: string) => void;
@@ -29,6 +31,7 @@ export const CanvasContext = React.createContext({} as ICanvasContext);
 
 export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
   const [size, setSize] = React.useState(16);
+  const [menu, setMenu] = React.useState(false);
   const [message, setMessage] = React.useState({
     message: "",
     type: "default",
@@ -81,6 +84,9 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
     });
   }
 
+  function changeMenu() {
+    setMenu(!menu);
+  }
   function changeSize() {
     switch (size) {
       case 8:
@@ -255,6 +261,8 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
         message,
         size,
         grid,
+        menu,
+        changeMenu,
         changeGrid,
         changeSize,
         paintCell,

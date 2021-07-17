@@ -21,7 +21,7 @@ a {
 :root{
   --primary-color:#DD2929;
   --primary-color-hover:#c01f1f;
-
+  --secundary-color:#32383d;
 
   --title-light:#fff;
   --text-light:#F5F5F5;
@@ -29,10 +29,16 @@ a {
 
   --animation-show:show forwards .3s;
 
+  --menu-item-default:rgba(255, 255, 255, 0.2);
+  
+  --menu-item-danger:rgba(221, 30, 40, 0.9);
+
+  --menu-item-text-danger:#fff;
+
   --message-default:#11c7ff;
-  --message-sucess:rgb(84, 223, 146);
-  --message-error:rgb(221, 30, 40);
-  --message-waring:rgb(212, 201, 40);
+  --message-sucess:#54df92;
+  --message-error:#dd1e28;
+  --message-waring:#d4c928;
 }
 
 @keyframes show {
