@@ -22,16 +22,18 @@ Nesse projeto ultilizei
 Um editor de Pixel Art feito com NextJS e Typescript com objetivo principal de criar uma maneira simples sprites ou imagens 2D, podendo pintar e escolher a cor de cada pixel.
 
 ## Principais funcionalidades da aplicação:
-- [x] Escolher formatos de 8x8, 16x16 32x32, 64x64.
 - [x] Esconder ou mostrar linhas do grid.
 - [x] Criar uma nova cor.
 - [x] Preview em miniatura do que está sendo feito no canvas.
-- [ ] Zoom.
 - [x] Escolher o tamanho do grid como -> 8x8, 16x16, 32x32.
+- [x] Escolher a espessura do pincel e da borracha. 
+- [X] Editar cores que já estã na paleta.
+- [x] Fazer o download do projeto aberto.
+- [X] Abrir uma imagem ou projeto já salvo e edita-lo. 
+- [ ] Zoom.
 - [ ] Salvar e carregar projetos.
 - [ ] Salvar paletas de cores.
 - [ ] Criar paletas de cores.
-- [X] Editar cores que já estã na paleta.
 
 ## Para rodar o projeto 
 - Clone o projeto
@@ -40,6 +42,7 @@ Um editor de Pixel Art feito com NextJS e Typescript com objetivo principal de c
 - Depois rode a aplicação com `yarn dev` ou `npm run dev`
 
 ## Imagens do projeto
-  ![ezgif com-gif-maker](https://user-images.githubusercontent.com/47904212/126045558-632e018d-b31e-43cc-ba78-2ea575c5f4fb.gif)
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/47904212/126053532-b8dc797b-2e04-4835-9f79-46d982ee16db.gif)
+
 
 
