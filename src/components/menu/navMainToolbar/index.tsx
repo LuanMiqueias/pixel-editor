@@ -14,7 +14,7 @@ export const NavMainToolbar = () => {
   return (
     <nav className={`${styles.container}`}>
       {menuItems.map((item, index) => (
-        <Link href={item.link}>
+        <Link href={item.link} key={item.name}>
           <a
             className={`${styles.item_menu} animation_show_top`}
             style={{

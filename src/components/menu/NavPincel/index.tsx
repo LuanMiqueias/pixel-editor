@@ -17,6 +17,7 @@ export const NavPincel = () => {
     <nav className={`${styles.container}`}>
       {menuItems.map((item, index) => (
         <div
+          key={item.name}
           className={`${styles.item_menu} animation_show_top`}
           onClick={() => changeSizePixel(item.size)}
           style={{

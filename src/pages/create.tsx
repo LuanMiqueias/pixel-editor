@@ -31,13 +31,19 @@ export default function Home() {
         <ColorsProvider>
           <ToolBarProvider>
             <main className={`${styles.content} animation_show_opacity`}>
-              <WarningScreen />
-              <ColorPalette />
-              <div className={styles.conatiner_table}>
-                <Table />
+              <div className={styles.column}>
+                <WarningScreen />
               </div>
-              <Toolbar />
-              <Preview />
+              <div className={styles.container_editor}>
+                <ColorPalette />
+                <div className={styles.conatiner_table}>
+                  <Table />
+                </div>
+                <Toolbar />
+              </div>
+              <div className={styles.column}>
+                <Preview />
+              </div>
             </main>
           </ToolBarProvider>
         </ColorsProvider>

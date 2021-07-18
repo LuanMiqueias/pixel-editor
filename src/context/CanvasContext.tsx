@@ -31,6 +31,8 @@ interface ICanvasContext {
     };
   };
   sizePixel: number;
+  canvasIsBlank: boolean;
+  loadImage: (image: HTMLImageElement) => void;
   toogleMenuToolbar: (name: string) => void;
   changeSizePixel: (value: number) => void;
   changeSize: () => void;
@@ -48,7 +50,8 @@ interface ICanvasContext {
 export const CanvasContext = React.createContext({} as ICanvasContext);
 
 export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
-  const [preview, setPreview] = React.useState("");
+  const [canvasIsBlank, setCanvasIsBlank] = React.useState(true);
+  const [preview, setPreview] = React.useState(null);
   const [size, setSize] = React.useState(16);
   const [sizePixel, setSizePixel] = React.useState(1);
 
@@ -91,11 +94,15 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
   }, [paintCell, changeSize, canvasConfig]);
 
   const save = React.useCallback(() => {
+    if (!canvasGrid.canvas || !canvasConfig.canvas) return;
+    setCanvasIsBlank(checkCanvasState());
     setPreview(canvasConfig.canvas.toDataURL());
-  }, [paintCell, changeSize, eraseCell, initCanvas]);
+  }, [paintCell, changeSize, eraseCell]);
 
   React.useEffect(() => {
-    canvasGrid.canvas && initGrid();
+    if (!canvasGrid.canvas || !canvasConfig.canvas) return;
+    initGrid();
+    canvasConfig.ctx.imageSmoothingEnabled = false;
   }, [canvasConfig]);
 
   React.useEffect(() => {
@@ -125,7 +132,14 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
       sizeCell: Math.floor(grid.current.width / size),
     });
   }
-
+  function checkCanvasState() {
+    return !canvasConfig.canvas
+      .getContext("2d")
+      .getImageData(0, 0, canvasConfig.canvas.width, canvasConfig.canvas.height)
+      .data.some(function (channel) {
+        return channel !== 0;
+      });
+  }
   function changeSize() {
     switch (size) {
       case 8:
@@ -206,14 +220,8 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
       return;
     }
 
-    let x =
-      coordinates.x -
-      canvasConfig.sizeCell * (sizePixel / 2) -
-      canvasConfig.rect.left;
-    let y =
-      coordinates.y -
-      canvasConfig.sizeCell * (sizePixel / 2) -
-      canvasConfig.rect.top;
+    let x = coordinates.x - canvasConfig.rect.left;
+    let y = coordinates.y - canvasConfig.rect.top;
 
     x = Math.floor(
       Math.floor(x * (size / canvasConfig.canvasSize)) * canvasConfig.sizeCell
@@ -269,6 +277,21 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
     setGrid(!grid);
   }
 
+  function loadImage(image: HTMLImageElement) {
+    console.log(image);
+    image.height = canvasConfig.canvas.height;
+    image.width = canvasConfig.canvas.width;
+    image.onload = () => {
+      canvasConfig.ctx.drawImage(
+        image,
+        0,
+        0,
+        canvasConfig.canvas.height,
+        canvasConfig.canvas.width
+      );
+      save();
+    };
+  }
   // Internal functions
   function initGrid(image?: string) {
     if (!canvasGrid.canvas) {
@@ -331,6 +354,7 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
   return (
     <CanvasContext.Provider
       value={{
+        canvasIsBlank,
         sizePixel,
         navsToolbar,
         message,
@@ -338,6 +362,7 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
         grid,
         menu,
         preview,
+        loadImage,
         toogleMenuToolbar,
         changeGrid,
         changeSizePixel,
