@@ -32,7 +32,7 @@ export const Preview = () => {
     element.click();
   }
   return (
-    <div className={styles.container}>
+    <div className={`${styles.container} animation_opacity`}>
       <div className={styles.content}>
         <div className={styles.container_canvas}>
           <p>Preview</p>

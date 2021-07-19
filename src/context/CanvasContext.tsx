@@ -313,18 +313,18 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
   }
 
   function undo() {
-    if (!history[history.length - 1 - indexUndoRedo]) return;
-    setIndexUndoRedo(indexUndoRedo + 1);
-    const image = new Image();
-    image.src = history[history.length - 1 - indexUndoRedo];
-    loadImage(image);
+    // if (!history[history.length - 1 - indexUndoRedo]) return;
+    // setIndexUndoRedo(indexUndoRedo + 1);
+    // const image = new Image();
+    // image.src = history[history.length - 1 - indexUndoRedo];
+    // loadImage(image);
   }
   function redo() {
-    if (!history[history.length - 1 - indexUndoRedo]) return;
-    setIndexUndoRedo(indexUndoRedo - 1);
-    const image = new Image();
-    image.src = history[history.length - 1 - indexUndoRedo];
-    loadImage(image);
+    // if (!history[history.length - 1 - indexUndoRedo]) return;
+    // setIndexUndoRedo(indexUndoRedo - 1);
+    // const image = new Image();
+    // image.src = history[history.length - 1 - indexUndoRedo];
+    // loadImage(image);
   }
   // Internal functions
   function initGrid(image?: string) {
