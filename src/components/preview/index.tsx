@@ -12,7 +12,7 @@ export const Preview = () => {
   const [image, setImage] = React.useState(null as HTMLImageElement);
 
   React.useEffect(() => {
-    if (!canvas.current) return;
+    if (!canvas.current || !preview) return;
     const ctx = canvas.current.getContext("2d");
     const image = new Image();
     image.src = preview;
@@ -27,7 +27,7 @@ export const Preview = () => {
     if (canvasIsBlank) return;
 
     let element = document.createElement("a");
-    element.href = preview;
+    element.href = preview && preview;
     element.download = "pixelArt.png";
     element.click();
   }
