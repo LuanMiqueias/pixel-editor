@@ -278,7 +278,6 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
   }
 
   function loadImage(image: HTMLImageElement) {
-    console.log(image);
     image.height = canvasConfig.canvas.height;
     image.width = canvasConfig.canvas.width;
     image.onload = () => {

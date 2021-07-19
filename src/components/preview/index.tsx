@@ -57,6 +57,7 @@ export const Preview = () => {
               type="file"
               id="image_file"
               accept="image/png, image/jpeg"
+              onClick={(e) => (e.currentTarget.value = null)}
               onChange={(e) => {
                 if (!e.target.files.length) return;
                 const src = URL.createObjectURL(e.target.files[0]);
