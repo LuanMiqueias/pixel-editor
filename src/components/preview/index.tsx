@@ -14,11 +14,11 @@ export const Preview = () => {
   React.useEffect(() => {
     if (!canvas.current) return;
     const ctx = canvas.current.getContext("2d");
-    ctx.clearRect(0, 0, canvas.current.width, canvas.current.height);
     const image = new Image();
     image.src = preview;
     image.setAttribute("crossOrigin", "anonymous");
     image.onload = () => {
+      ctx.clearRect(0, 0, canvas.current.width, canvas.current.height);
       ctx.drawImage(image, 0, 0, canvas.current.width, canvas.current.height);
     };
   }, [preview]);
