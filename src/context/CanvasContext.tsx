@@ -48,6 +48,7 @@ interface ICanvasContext {
   saveCells: () => void;
   undo: () => void;
   redo: () => void;
+  saveState: () => void;
 }
 
 export const CanvasContext = React.createContext({} as ICanvasContext);
@@ -57,6 +58,8 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
   const [preview, setPreview] = React.useState(null);
   const [size, setSize] = React.useState(16);
   const [sizePixel, setSizePixel] = React.useState(1);
+  const [indexUndoRedo, setIndexUndoRedo] = React.useState(0);
+  const [currentState, setCurrentState] = React.useState("");
 
   const [navsToolbar, setNavsToolbar] = React.useState({
     activeCurrent: "",
@@ -95,6 +98,8 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
     sizeCell: 0,
     canvasSize: 0,
   });
+
+  const [history, setHistory] = React.useState([""]);
 
   React.useEffect(() => {
     if (!canvasConfig.canvas) return;
@@ -163,6 +168,10 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
     }
   }
 
+  function saveState() {
+    setHistory([...history, canvasConfig.canvas.toDataURL()]);
+  }
+
   function changeGridSize(size) {
     setSize(size);
 
@@ -179,7 +188,6 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
       activeCurrent: "",
     });
   }
-
   function paintCell(coordinates: { x: number; y: number }, color: string) {
     if (!canvasConfig.canvas) {
       showMessage("error");
@@ -196,6 +204,7 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
       canvasConfig.sizeCell * sizePixel,
       canvasConfig.sizeCell * sizePixel
     );
+    setIndexUndoRedo(1);
     save();
   }
 
@@ -212,6 +221,7 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
       canvasConfig.sizeCell * sizePixel,
       canvasConfig.sizeCell * sizePixel
     );
+    setIndexUndoRedo(1);
     save();
   }
 
@@ -244,9 +254,11 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
       canvasConfig.canvasSize,
       canvasConfig.canvasSize
     );
+    setIndexUndoRedo(1);
     save();
   }
   function saveCells() {
+    saveState();
     showMessage("save");
   }
   function showMessage(
@@ -279,9 +291,16 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
   }
 
   function loadImage(image: HTMLImageElement) {
+    if (!canvasConfig.canvas) return;
     image.height = canvasConfig.canvas.height;
     image.width = canvasConfig.canvas.width;
     image.onload = () => {
+      canvasConfig.ctx.clearRect(
+        0,
+        0,
+        canvasConfig.canvas.height,
+        canvasConfig.canvas.width
+      );
       canvasConfig.ctx.drawImage(
         image,
         0,
@@ -293,8 +312,20 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
     };
   }
 
-  function undo() {}
-  function redo() {}
+  function undo() {
+    if (!history[history.length - 1 - indexUndoRedo]) return;
+    setIndexUndoRedo(indexUndoRedo + 1);
+    const image = new Image();
+    image.src = history[history.length - 1 - indexUndoRedo];
+    loadImage(image);
+  }
+  function redo() {
+    if (!history[history.length - 1 - indexUndoRedo]) return;
+    setIndexUndoRedo(indexUndoRedo - 1);
+    const image = new Image();
+    image.src = history[history.length - 1 - indexUndoRedo];
+    loadImage(image);
+  }
   // Internal functions
   function initGrid(image?: string) {
     if (!canvasGrid.canvas) {
@@ -367,6 +398,7 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
         preview,
         undo,
         redo,
+        saveState,
         loadImage,
         toogleMenuToolbar,
         changeGrid,

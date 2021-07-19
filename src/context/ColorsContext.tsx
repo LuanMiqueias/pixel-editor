@@ -20,7 +20,7 @@ export const ColorsContext = React.createContext({} as IColorsProps);
 export const ColorsProvider = ({ children }: IColorsProviderProps) => {
   const [color, setColor] = React.useState("#FFFFFF");
   const [mouseOver, setMouseOver] = React.useState(false);
-  const { paintCell, eraseCell } = React.useContext(CanvasContext);
+  const { paintCell, eraseCell, saveState } = React.useContext(CanvasContext);
 
   function changeColor(color) {
     setColor(color);
@@ -32,6 +32,7 @@ export const ColorsProvider = ({ children }: IColorsProviderProps) => {
       return mouseOver && paintCell(coordinates, color);
     } else {
       paintCell(coordinates, color);
+      saveState();
     }
   }
   function erase(e: React.MouseEvent, coordinates: { x: number; y: number }) {
@@ -40,6 +41,7 @@ export const ColorsProvider = ({ children }: IColorsProviderProps) => {
       return mouseOver && eraseCell(coordinates);
     } else {
       eraseCell(coordinates);
+      saveState();
     }
   }
   function handlePickedColor(e: React.ChangeEvent<HTMLInputElement>) {

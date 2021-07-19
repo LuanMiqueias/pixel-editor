@@ -9,7 +9,7 @@ interface IPropsTable {
 }
 
 export const Table = () => {
-  const { size, initCanvas, resetCells } = React.useContext(CanvasContext);
+  const { size, initCanvas, saveState } = React.useContext(CanvasContext);
   const { setMouseOver, mouseOver, color } = React.useContext(ColorsContext);
   const { useTool } = React.useContext(ToolBarContext);
 
@@ -28,10 +28,6 @@ export const Table = () => {
     <div className={styles.container}>
       <canvas
         className={`${styles.canvas}`}
-        onMouseUp={() => setMouseOver(false)}
-        onMouseDown={() => setMouseOver(true)}
-        onMouseMove={(e) => handleMouse(e)}
-        onClick={(e) => handleMouse(e)}
         ref={canvas}
         height="512px"
         width="512px"

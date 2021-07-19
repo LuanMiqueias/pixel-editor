@@ -35,14 +35,16 @@ export const ToolbarItem = ({
   }
   return (
     <div
-      className={`${styles.item} ${
-        type === toolSeleted && styles.item_active
-      } animation_show_top ${hasMenu && styles.hasMenu}`}
+      className={`
+        animation_show_top 
+        ${styles.item} 
+        ${disabled && styles.item_disabled} 
+        ${type === toolSeleted && styles.item_active}  
+        ${hasMenu && styles.hasMenu} 
+      `}
       onClick={() => handleClick()}
     >
-      <div
-        className={`${styles.content_item} ${disabled && styles.item_disabled}`}
-      >
+      <div className={`${styles.content_item} `}>
         {img ? (
           type === toolSeleted || isActive ? (
             <img
