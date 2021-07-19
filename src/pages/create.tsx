@@ -22,7 +22,8 @@ export default function Home() {
         ></link>
       </Head>
       <h1 className={`animation_show_top`}>
-        <img src="./logo.svg" alt="" /> <span>Não se esqueça de salvar</span>
+        <img src="./logo.svg" alt="" />{" "}
+        <span>um simples editor de pixel arts</span>
       </h1>
       <h2 className={styles.moblie_waring}>
         Não há suporte para telas menores que <br /> <span>768px</span>
