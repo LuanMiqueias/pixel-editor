@@ -7,14 +7,15 @@ import styles from "./styles.module.css";
 export const NavPincel = () => {
   const { sizePixel, changeSizePixel } = React.useContext(CanvasContext);
   const menuItems = [
-    { name: "1px", size: 1 },
-    { name: "2px", size: 2 },
-    { name: "3px", size: 3 },
-    { name: "4px", size: 4 },
-    { name: "5px", size: 5 },
+    { name: "1", size: 1 },
+    { name: "2", size: 2 },
+    { name: "3", size: 3 },
+    { name: "4", size: 4 },
+    { name: "5", size: 5 },
+    { name: "6", size: 6 },
   ];
   return (
-    <nav className={`${styles.container}`}>
+    <div className={styles.content}>
       {menuItems.map((item, index) => (
         <div
           key={item.name}
@@ -23,12 +24,12 @@ export const NavPincel = () => {
           style={{
             background: sizePixel === item.size && `var(--secundary-color)`,
             color: sizePixel === item.size && `var(--text-light)`,
-            animationDelay: `${index / 10}s`,
+            animationDelay: `${index / 40}s`,
           }}
         >
           {item.name}
         </div>
       ))}
-    </nav>
+    </div>
   );
 };

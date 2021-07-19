@@ -15,6 +15,7 @@ export const Toolbar = () => {
         img={"./menu.svg"}
         hover={"./menu_close.png"}
         isActive={navsToolbar.activeCurrent === "main"}
+        hasMenu
         isClickable
       />
 
@@ -25,6 +26,7 @@ export const Toolbar = () => {
         img={"./size_pixel.svg"}
         hover={"./menu_close.png"}
         isActive={navsToolbar.activeCurrent === "sizePixel"}
+        hasMenu
         isClickable
       />
 
@@ -39,7 +41,6 @@ export const Toolbar = () => {
 
       <ToolbarItem type="save" img={"./save.svg"} isClickable />
       <ToolbarItem type="clean" img={"./clean.svg"} isClickable />
-      <Menu />
     </div>
   );
 };

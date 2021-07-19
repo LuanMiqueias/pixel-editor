@@ -12,7 +12,7 @@ export const NavMainToolbar = () => {
     { name: "Excluir projeto", link: "/delete", type: "danger" },
   ];
   return (
-    <nav className={`${styles.container}`}>
+    <>
       {menuItems.map((item, index) => (
         <Link href={item.link} key={item.name}>
           <a
@@ -20,13 +20,13 @@ export const NavMainToolbar = () => {
             style={{
               background: `var(--menu-item-${item.type})`,
               color: `var(--menu-item-text-${item.type})`,
-              animationDelay: `${index / 10}s`,
+              animationDelay: `${index / 40}s`,
             }}
           >
             {item.name}
           </a>
         </Link>
       ))}
-    </nav>
+    </>
   );
 };
