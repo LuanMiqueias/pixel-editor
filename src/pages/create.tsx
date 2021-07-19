@@ -36,7 +36,7 @@ export default function Home() {
               </div>
               <div className={styles.container_editor}>
                 <ColorPalette />
-                <div className={styles.conatiner_table}>
+                <div className={styles.container_table}>
                   <Table />
                 </div>
                 <Toolbar />
