@@ -37,10 +37,12 @@ export const ToolbarItem = ({
     <div
       className={`${styles.item} ${
         type === toolSeleted && styles.item_active
-      } animation_show_top`}
+      } animation_show_top ${hasMenu && styles.hasMenu}`}
       onClick={() => handleClick()}
     >
-      <div className={styles.content_item}>
+      <div
+        className={`${styles.content_item} ${disabled && styles.item_disabled}`}
+      >
         {img ? (
           type === toolSeleted || isActive ? (
             <img
@@ -56,10 +58,19 @@ export const ToolbarItem = ({
             />
           )
         ) : (
-          <div className={styles.text}>
-            <p>{text}</p>
-            <p>{type}</p>
-          </div>
+          <>
+            {hover && isActive ? (
+              <img
+                src={hover ? hover : img}
+                alt={type}
+                style={maxWidth && { maxWidth: maxWidth }}
+              />
+            ) : (
+              <div className={styles.text}>
+                <p>{text}</p>
+              </div>
+            )}
+          </>
         )}
       </div>
       {hasMenu && isActive && <Menu />}

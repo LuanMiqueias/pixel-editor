@@ -23,14 +23,8 @@ export const ToolBarProvider = ({ children }: IToolBarProviderProps) => {
   const [toolCliked, setToolCliked] = React.useState("" as string);
 
   const { erase, paint } = React.useContext(ColorsContext);
-  const {
-    toogleMenuToolbar,
-    changeSize,
-    resetCells,
-    saveCells,
-    changeGrid,
-    changeSizePixel,
-  } = React.useContext(CanvasContext);
+  const { toogleMenuToolbar, resetCells, saveCells, changeGrid, redo, undo } =
+    React.useContext(CanvasContext);
 
   const tools = {
     toolsSelectable: {
@@ -58,9 +52,9 @@ export const ToolBarProvider = ({ children }: IToolBarProviderProps) => {
         name: "grid",
         init: () => changeGrid(),
       },
-      size: {
-        name: "size",
-        init: () => changeSize(),
+      gridSize: {
+        name: "gridSize",
+        init: () => toogleMenuToolbar("gridSize"),
       },
       save: {
         name: "save",
@@ -70,6 +64,14 @@ export const ToolBarProvider = ({ children }: IToolBarProviderProps) => {
         name: "clean",
         init: () =>
           confirm("Isso irá limpar a tela, tem certeza?") && resetCells(),
+      },
+      undo: {
+        name: "undo",
+        init: () => undo(),
+      },
+      redo: {
+        name: "redo",
+        init: () => redo(),
       },
     },
   };

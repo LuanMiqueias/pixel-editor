@@ -21,7 +21,7 @@ a {
 :root{
   --primary-color:#DD2929;
   --primary-color-hover:#c01f1f;
-  --secundary-color:#32383d;
+  --secundary-color:#298ec9;
 
   --title-light:#fff;
   --text-light:#F5F5F5;
@@ -32,7 +32,7 @@ a {
   --animation-show:show forwards .3s;
   --menu-item-active:#298ec9;
 
-  --menu-item-default:rgba(255, 255, 255, 0.2);
+  --menu-item-default:rgba(255, 255, 255, 0.1);
   
   --menu-item-danger:rgba(221, 30, 40, 0.9);
 

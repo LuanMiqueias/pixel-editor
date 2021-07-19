@@ -1,4 +1,5 @@
 import React from "react";
+import { NavGridSize } from "../components/menu/NavGridSize";
 import { NavMainToolbar } from "../components/menu/navMainToolbar";
 import { NavPincel } from "../components/menu/NavPincel";
 
@@ -35,7 +36,7 @@ interface ICanvasContext {
   loadImage: (image: HTMLImageElement) => void;
   toogleMenuToolbar: (name: string) => void;
   changeSizePixel: (value: number) => void;
-  changeSize: () => void;
+  changeGridSize: (size: number) => void;
   resetCells: () => void;
   paintCell: (coordinates: { x: number; y: number }, color: string) => void;
   eraseCell: (coordinates: { x: number; y: number }) => void;
@@ -45,6 +46,8 @@ interface ICanvasContext {
     grid: React.RefObject<HTMLCanvasElement>
   ) => void;
   saveCells: () => void;
+  undo: () => void;
+  redo: () => void;
 }
 
 export const CanvasContext = React.createContext({} as ICanvasContext);
@@ -65,6 +68,10 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
       main: {
         name: "main",
         content: <NavMainToolbar />,
+      },
+      gridSize: {
+        name: "gridSize",
+        content: <NavGridSize />,
       },
     },
   });
@@ -91,13 +98,13 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
 
   React.useEffect(() => {
     if (!canvasConfig.canvas) return;
-  }, [paintCell, changeSize, canvasConfig]);
+  }, [paintCell, changeGridSize, canvasConfig]);
 
   const save = React.useCallback(() => {
     if (!canvasGrid.canvas || !canvasConfig.canvas) return;
     setCanvasIsBlank(checkCanvasState());
     setPreview(canvasConfig.canvas.toDataURL());
-  }, [paintCell, changeSize, eraseCell]);
+  }, [paintCell, changeGridSize, eraseCell]);
 
   React.useEffect(() => {
     if (!canvasGrid.canvas || !canvasConfig.canvas) return;
@@ -140,22 +147,6 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
         return channel !== 0;
       });
   }
-  function changeSize() {
-    switch (size) {
-      case 8:
-        setSize(16);
-        break;
-      case 16:
-        setSize(32);
-        break;
-      case 32:
-        setSize(64);
-        break;
-      case 64:
-        setSize(8);
-        break;
-    }
-  }
   function toogleMenuToolbar(name: string) {
     if (!navsToolbar.navs[name]) return;
 
@@ -171,6 +162,16 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
       });
     }
   }
+
+  function changeGridSize(size) {
+    setSize(size);
+
+    setNavsToolbar({
+      ...navsToolbar,
+      activeCurrent: "",
+    });
+  }
+
   function changeSizePixel(value) {
     setSizePixel(value);
     setNavsToolbar({
@@ -291,6 +292,9 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
       save();
     };
   }
+
+  function undo() {}
+  function redo() {}
   // Internal functions
   function initGrid(image?: string) {
     if (!canvasGrid.canvas) {
@@ -361,11 +365,13 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
         grid,
         menu,
         preview,
+        undo,
+        redo,
         loadImage,
         toogleMenuToolbar,
         changeGrid,
         changeSizePixel,
-        changeSize,
+        changeGridSize,
         paintCell,
         eraseCell,
         initCanvas,

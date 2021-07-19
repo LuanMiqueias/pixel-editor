@@ -19,7 +19,6 @@ export const NavMainToolbar = () => {
             className={`${styles.item_menu} animation_show_top`}
             style={{
               background: `var(--menu-item-${item.type})`,
-              color: `var(--menu-item-text-${item.type})`,
               animationDelay: `${index / 40}s`,
             }}
           >

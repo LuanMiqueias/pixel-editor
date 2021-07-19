@@ -30,7 +30,14 @@ export const Toolbar = () => {
         isClickable
       />
 
-      <ToolbarItem type="size" text={`${size}`} isClickable />
+      <ToolbarItem
+        type="gridSize"
+        text={`${size}px`}
+        hover={"./menu_close.png"}
+        isActive={navsToolbar.activeCurrent === "gridSize"}
+        hasMenu
+        isClickable
+      />
       <ToolbarItem
         type="grid"
         img={"./grid_on.svg"}
@@ -41,6 +48,9 @@ export const Toolbar = () => {
 
       <ToolbarItem type="save" img={"./save.svg"} isClickable />
       <ToolbarItem type="clean" img={"./clean.svg"} isClickable />
+
+      <ToolbarItem type="undo" img={"./undo.svg"} isClickable disabled />
+      <ToolbarItem type="redo" img={"./redo.svg"} isClickable disabled />
     </div>
   );
 };

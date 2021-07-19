@@ -1,11 +1,11 @@
 .container{
   width: fit-content;
   min-height: fit-content;
-  background-color: #909090;
+  background-color: #202020;
   border-radius: 5px;
   left:0;
   
-  box-shadow: 0 0 20px rgba(0,0,0,0.2) ;
+  box-shadow: 0 0 30px rgba(0,0,0,0.3) ;
   position: absolute;
   z-index: 100;
   

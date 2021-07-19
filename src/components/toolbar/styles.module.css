@@ -1,22 +1,10 @@
-.cell{
-  width: 1.5rem;
-  height: 1.5rem;
-  border-left: 1px solid #404040;
-  border-bottom: 1px solid #404040;
-  cursor: cell;
-  transition: all .1s;
-  user-select: none;
-}
-.cell:hover{
-  transition: all 0s;
-  opacity: .9;
-}
 .toolbar{
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
   max-height: 550px;
-  gap:8px;
+  gap:4px;
   z-index: 10;
   position: relative;
 }
+
