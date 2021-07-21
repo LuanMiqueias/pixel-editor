@@ -42,7 +42,8 @@ Um editor de Pixel Art feito com NextJS e Typescript com objetivo principal de c
 - Depois rode a aplicação com `yarn dev` ou `npm run dev`
 
 ## Imagens do projeto
-![ezgif com-gif-maker](https://user-images.githubusercontent.com/47904212/126053532-b8dc797b-2e04-4835-9f79-46d982ee16db.gif)
+![ezgif com-gif-maker](https://user-images.githubusercontent.com/47904212/126353325-75598c64-7947-400c-a78a-14dd7717cd23.gif)
+
 
 
 
