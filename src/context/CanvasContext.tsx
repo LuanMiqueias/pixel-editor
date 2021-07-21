@@ -2,6 +2,8 @@ import React from "react";
 import { NavGridSize } from "../components/menu/NavGridSize";
 import { NavMainToolbar } from "../components/menu/navMainToolbar";
 import { NavPincel } from "../components/menu/NavPincel";
+import { GlobalContext } from "./GlobalContext";
+import { MenuContext } from "./MenuContext";
 
 interface IPropsProjects {
   title: string;
@@ -14,27 +16,11 @@ interface ICanvasProviderProps {
 
 interface ICanvasContext {
   size: number;
-  message: { message: string; type: string };
   grid: boolean;
   menu: boolean;
   preview: string;
-  navsToolbar: {
-    activeCurrent: string;
-    navs: {
-      sizePixel: {
-        name: string;
-        content: React.ReactNode;
-      };
-      main: {
-        name: string;
-        content: React.ReactNode;
-      };
-    };
-  };
   sizePixel: number;
   canvasIsBlank: boolean;
-  loadImage: (image: HTMLImageElement) => void;
-  toogleMenuToolbar: (name: string) => void;
   changeSizePixel: (value: number) => void;
   changeGridSize: (size: number) => void;
   resetCells: () => void;
@@ -49,6 +35,7 @@ interface ICanvasContext {
   undo: () => void;
   redo: () => void;
   saveState: () => void;
+  loadImageInCanvas: (image: HTMLImageElement) => void;
 }
 
 export const CanvasContext = React.createContext({} as ICanvasContext);
@@ -59,30 +46,8 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
   const [size, setSize] = React.useState(16);
   const [sizePixel, setSizePixel] = React.useState(1);
   const [indexUndoRedo, setIndexUndoRedo] = React.useState(0);
-  const [currentState, setCurrentState] = React.useState("");
-
-  const [navsToolbar, setNavsToolbar] = React.useState({
-    activeCurrent: "",
-    navs: {
-      sizePixel: {
-        name: "sizePixel",
-        content: <NavPincel />,
-      },
-      main: {
-        name: "main",
-        content: <NavMainToolbar />,
-      },
-      gridSize: {
-        name: "gridSize",
-        content: <NavGridSize />,
-      },
-    },
-  });
   const [menu, setMenu] = React.useState(false);
-  const [message, setMessage] = React.useState({
-    message: "",
-    type: "default",
-  });
+
   const [grid, setGrid] = React.useState(true);
   const [canvasConfig, setCanvasConfig] = React.useState({
     canvas: null as HTMLCanvasElement,
@@ -101,15 +66,18 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
 
   const [history, setHistory] = React.useState([""]);
 
-  React.useEffect(() => {
-    if (!canvasConfig.canvas) return;
-  }, [paintCell, changeGridSize, canvasConfig]);
+  const { showMessage, loadImage } = React.useContext(GlobalContext);
+  const { closeNav } = React.useContext(MenuContext);
 
   const save = React.useCallback(() => {
     if (!canvasGrid.canvas || !canvasConfig.canvas) return;
     setCanvasIsBlank(checkCanvasState());
     setPreview(canvasConfig.canvas.toDataURL());
   }, [paintCell, changeGridSize, eraseCell]);
+
+  React.useEffect(() => {
+    if (!canvasConfig.canvas) return;
+  }, [paintCell, changeGridSize, canvasConfig]);
 
   React.useEffect(() => {
     if (!canvasGrid.canvas || !canvasConfig.canvas) return;
@@ -152,21 +120,6 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
         return channel !== 0;
       });
   }
-  function toogleMenuToolbar(name: string) {
-    if (!navsToolbar.navs[name]) return;
-
-    if (navsToolbar.activeCurrent === name) {
-      setNavsToolbar({
-        ...navsToolbar,
-        activeCurrent: "",
-      });
-    } else {
-      setNavsToolbar({
-        ...navsToolbar,
-        activeCurrent: name,
-      });
-    }
-  }
 
   function saveState() {
     setHistory([...history, canvasConfig.canvas.toDataURL()]);
@@ -175,18 +128,12 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
   function changeGridSize(size) {
     setSize(size);
 
-    setNavsToolbar({
-      ...navsToolbar,
-      activeCurrent: "",
-    });
+    closeNav();
   }
 
   function changeSizePixel(value) {
     setSizePixel(value);
-    setNavsToolbar({
-      ...navsToolbar,
-      activeCurrent: "",
-    });
+    closeNav();
   }
   function paintCell(coordinates: { x: number; y: number }, color: string) {
     if (!canvasConfig.canvas) {
@@ -261,55 +208,10 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
     saveState();
     showMessage("save");
   }
-  function showMessage(
-    type: "save" | "error" | "waring",
-    customMessage?: string
-  ) {
-    const messages = {
-      initial: { message: "", type: "default" },
-      save: { message: "Salvo com sucesso!", type: "sucess" },
-      error: { message: "Tente novamente mais tarde", type: "error" },
-      waring: { message: "Tente novamente mais tarde", type: "waring" },
-    };
-    if (customMessage) {
-      setMessage({
-        message: customMessage,
-        type: messages[type].type,
-      });
-    } else {
-      setMessage(messages[type]);
-    }
-
-    setTimeout(() => {
-      setMessage(messages.initial);
-    }, 2500);
-  }
 
   function changeGrid() {
     grid ? clearGrid() : drawGrid();
     setGrid(!grid);
-  }
-
-  function loadImage(image: HTMLImageElement) {
-    if (!canvasConfig.canvas) return;
-    image.height = canvasConfig.canvas.height;
-    image.width = canvasConfig.canvas.width;
-    image.onload = () => {
-      canvasConfig.ctx.clearRect(
-        0,
-        0,
-        canvasConfig.canvas.height,
-        canvasConfig.canvas.width
-      );
-      canvasConfig.ctx.drawImage(
-        image,
-        0,
-        0,
-        canvasConfig.canvas.height,
-        canvasConfig.canvas.width
-      );
-      save();
-    };
   }
 
   function undo() {
@@ -385,13 +287,32 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
     canvasGrid.ctx.stroke();
   }
 
+  function loadImageInCanvas(image: HTMLImageElement) {
+    if (!canvasConfig.canvas) return;
+    image.height = canvasConfig.canvas.height;
+    image.width = canvasConfig.canvas.width;
+    image.onload = () => {
+      canvasConfig.ctx.clearRect(
+        0,
+        0,
+        canvasConfig.canvas.height,
+        canvasConfig.canvas.width
+      );
+      canvasConfig.ctx.drawImage(
+        image,
+        0,
+        0,
+        canvasConfig.canvas.height,
+        canvasConfig.canvas.width
+      );
+      save();
+    };
+  }
   return (
     <CanvasContext.Provider
       value={{
         canvasIsBlank,
         sizePixel,
-        navsToolbar,
-        message,
         size,
         grid,
         menu,
@@ -399,8 +320,6 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
         undo,
         redo,
         saveState,
-        loadImage,
-        toogleMenuToolbar,
         changeGrid,
         changeSizePixel,
         changeGridSize,
@@ -409,6 +328,7 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
         initCanvas,
         resetCells,
         saveCells,
+        loadImageInCanvas,
       }}
     >
       {children}

@@ -1,9 +1,9 @@
 import React from "react";
-import { CanvasContext } from "../../context/CanvasContext";
+import { MenuContext } from "../../context/MenuContext";
 import styles from "./styles.module.css";
 
 export const Menu: React.FC = () => {
-  const { navsToolbar } = React.useContext(CanvasContext);
+  const { navsToolbar } = React.useContext(MenuContext);
 
   return (
     <nav className={`${styles.container}`}>

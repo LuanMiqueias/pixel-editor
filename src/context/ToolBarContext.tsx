@@ -1,6 +1,7 @@
 import React, { ReactNode } from "react";
 import { CanvasContext } from "./CanvasContext";
 import { ColorsContext } from "./ColorsContext";
+import { MenuContext } from "./MenuContext";
 
 interface IToolBarProviderProps {
   children: React.ReactNode;
@@ -23,8 +24,9 @@ export const ToolBarProvider = ({ children }: IToolBarProviderProps) => {
   const [toolCliked, setToolCliked] = React.useState("" as string);
 
   const { erase, paint } = React.useContext(ColorsContext);
-  const { toogleMenuToolbar, resetCells, saveCells, changeGrid, redo, undo } =
+  const { resetCells, saveCells, changeGrid, redo, undo } =
     React.useContext(CanvasContext);
+  const { toogleMenuToolbar } = React.useContext(MenuContext);
 
   const tools = {
     toolsSelectable: {

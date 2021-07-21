@@ -1,5 +1,6 @@
 import React from "react";
 import { CanvasContext } from "../../context/CanvasContext";
+import { MenuContext } from "../../context/MenuContext";
 import { Menu } from "../menu";
 import { NavMainToolbar } from "../menu/navMainToolbar";
 import { NavPincel } from "../menu/NavPincel";
@@ -7,7 +8,9 @@ import styles from "./styles.module.css";
 import { ToolbarItem } from "./toolbarItem";
 
 export const Toolbar = () => {
-  const { size, grid, navsToolbar } = React.useContext(CanvasContext);
+  const { navsToolbar } = React.useContext(MenuContext);
+  const { size, grid } = React.useContext(CanvasContext);
+
   return (
     <div className={`${styles.toolbar} animation_show_opacity`}>
       <ToolbarItem

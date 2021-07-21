@@ -1,5 +1,6 @@
 import React from "react";
 import { CanvasContext } from "../../context/CanvasContext";
+import { GlobalContext } from "../../context/GlobalContext";
 import styles from "./styles.module.css";
 
 interface IPropsTable {
@@ -7,7 +8,8 @@ interface IPropsTable {
 }
 
 export const Preview = () => {
-  const { preview, loadImage, canvasIsBlank } = React.useContext(CanvasContext);
+  const { preview, canvasIsBlank, loadImageInCanvas } =
+    React.useContext(CanvasContext);
   const canvas: React.RefObject<HTMLCanvasElement> = React.useRef();
   const [image, setImage] = React.useState(null as HTMLImageElement);
 
@@ -64,7 +66,7 @@ export const Preview = () => {
                 const newImage = new Image();
                 newImage.src = src;
 
-                loadImage(newImage);
+                loadImageInCanvas(newImage);
               }}
             />
           </label>
