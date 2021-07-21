@@ -23,19 +23,19 @@
   font-family: 'Josefin Sans', sans-serif;
 }
 .content {
-  width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap:24px;
+  gap:16px;
+  max-width: 1200px;
 }
 .container_editor{
-  max-width: 880px;
   display: flex;
-  gap:24px
+  gap:16px
 }
 .column{
+  max-width: 300px;
   width: 100%;
   height: 100%;
 }

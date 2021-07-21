@@ -1,8 +1,102 @@
 .palette{
   display:flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
   gap:4px;
   padding: .75rem .75rem;
   background: rgba(255, 255, 255, 0.1);
-  border-radius: 10px;
+  border-radius: 3px;
+  height: 100%;
+  width: 290px;
+}
+
+.container_pallet_color{
+  height: 100%;
+  display:flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  justify-content: flex-start;
+  align-content: flex-start;
+  gap:4px;
+  padding: .75rem;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+
+/* ============ Pick color */
+.colorPiker{
+  width: 100%;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+}
+.colorPiker > div{
+  min-width: 100% !important;
+  max-width: 100% !important;
+  width: 100% !important;
+  padding: 4px;
+}
+.colorPiker input{
+  width: 100% !important;
+  padding: 8px !important;
+  outline: none;
+  border: 2px solid transparent !important;
+  text-align: center;
+  font-size: 11px !important;
+}
+.colorPiker input:focus{
+  transition: all .2s !important;
+  background: var(--secundary-color-hover) !important;
+  border-color:var(--secundary-color) !important;
+}
+.colorPiker label span {
+  display: none !important;
+}
+.colorPiker input[type=number] {
+  -moz-appearance: textfield !important;
+}
+.colorPiker input::-webkit-outer-spin-button,
+.colorPiker input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.colorPiker > div > div:nth-child(2)>div:nth-child(1){
+  display: none !important;
+}
+
+.colorPiker > div > div:nth-child(2)>div:nth-child(2) div > div {
+  margin-top:2px;
+  padding: 0 4px;
+}
+.container_background_color{
+  width: 100%;
+  border-radius: 3px;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: flex-start;
+  justify-content: flex-start;
+  height: 50px;
+  gap:4px
+}
+.background_color{
+  height: 100%;
+  border-radius: 3px;
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  border:0;
+  cursor: pointer;
+  transition: all .2s;
+}
+
+.background_color img{
+  opacity: .6;
+  transition: all .2s;
+
+}
+.background_color:hover{
+  opacity: .8;
+}
+.background_color:hover img{
+  opacity: 1;
 }

@@ -1,11 +1,13 @@
 import React from "react";
 import styles from "./styles.module.css";
 import { Color } from "./colors-item";
+import ColorPicker from "react-pick-color";
+import { ColorsContext } from "../../context/ColorsContext";
 
 export const ColorPalette = () => {
-  const colors = [
-    "#FFFFFF",
+  const [colors, setColors] = React.useState([
     "#041B3E",
+    "#FFFFFF",
     "#490505",
     "#572102",
     "#064904",
@@ -16,13 +18,63 @@ export const ColorPalette = () => {
     "#166714",
     "#11A466",
     "#371383",
-  ];
+  ]);
+  function addColor(color: string) {
+    if (colors.find((color_item) => color === color_item)) return;
+    setColors([...colors, color]);
+  }
+  function deleteCurrentColor() {
+    const newColors = colors.filter((color_item) => color !== color_item);
+    console.log(newColors);
+    setColors([...newColors]);
+  }
+  interface IColorsInput {
+    alpha: number;
+    hex: string;
+    hsl: { h: number; s: number; l: number };
+    hsv: { h: number; s: number; v: number };
+    rgb: { r: number; g: number; b: number };
+  }
+  const { color, changeColor } = React.useContext(ColorsContext);
+  const [colorsInput, setColorsInput] = React.useState<IColorsInput>();
   return (
     <div className={`${styles.palette} animation_show_opacity`}>
-      <Color color="pick-color" />
-      {colors.map((color, index) => (
-        <Color color={color} key={`color_${color}_${index}`} />
-      ))}
+      <div className={styles.colorPiker}>
+        <ColorPicker
+          color={color}
+          className="teste"
+          onChange={(color) => {
+            changeColor(color.hex);
+            setColorsInput(color);
+          }}
+          hideAlpha
+          theme={{
+            background: "transparent",
+            inputBackground: "rgba(255, 255, 255, 0.1)",
+            borderColor: "none",
+            borderRadius: "3px",
+            color: "white",
+            width: "100%",
+          }}
+        />
+      </div>
+      <div className={styles.container_pallet_color}>
+        {colors.map((color, index) => (
+          <Color color={color} key={`color_${color}_${index}`} />
+        ))}
+        <Color color="pick-color" click={addColor} />
+      </div>
+      <div className={styles.container_background_color}>
+        <button
+          className={styles.background_color}
+          style={{ background: color }}
+          onClick={deleteCurrentColor}
+        >
+          {colors.find((item) => item === color) && (
+            <img src="/delete_light.svg" alt="" />
+          )}
+        </button>
+      </div>
     </div>
   );
 };

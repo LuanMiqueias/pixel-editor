@@ -34,9 +34,9 @@ export default function Home() {
             <main className={`${styles.content} animation_show_opacity`}>
               <div className={styles.column}>
                 <WarningScreen />
+                <ColorPalette />
               </div>
               <div className={styles.container_editor}>
-                <ColorPalette />
                 <div className={styles.container_table}>
                   <Table />
                 </div>

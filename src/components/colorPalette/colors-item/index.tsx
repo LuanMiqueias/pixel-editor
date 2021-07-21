@@ -5,8 +5,9 @@ import styles from "./styles.module.css";
 
 interface IPropsToolBarItem {
   color: string;
+  click?: (color: string) => void;
 }
-export const Color = ({ color }: IPropsToolBarItem) => {
+export const Color = ({ color, click }: IPropsToolBarItem) => {
   const {
     changeColor,
     color: colorSelect,
@@ -14,24 +15,20 @@ export const Color = ({ color }: IPropsToolBarItem) => {
   } = React.useContext(ColorsContext);
   const { changeTool } = React.useContext(ToolBarContext);
   return (
-    <>
+    <div className={styles.container}>
       {color === "pick-color" ? (
-        <label
-          className={`${styles.pick_color} animation_show_top`}
-          style={{ background: colorSelect }}
-          htmlFor="pick-color"
-          onClick={() => changeTool("draw")}
-        >
-          <input
-            type="color"
-            name="pick-color"
-            id="pick-color"
-            onChange={(e) => handlePickedColor(e)}
-          />
-        </label>
+        <div
+          className={`${styles.pick_color}`}
+          style={{ background: color }}
+          onClick={() => {
+            click(colorSelect);
+          }}
+        ></div>
       ) : (
         <div
-          className={`${styles.item} animation_show_top`}
+          className={`${styles.item} animation_show_opacity ${
+            colorSelect === color && styles.item_active
+          }`}
           style={{ background: color }}
           onClick={() => {
             changeColor(color);
@@ -39,6 +36,6 @@ export const Color = ({ color }: IPropsToolBarItem) => {
           }}
         ></div>
       )}
-    </>
+    </div>
   );
 };
