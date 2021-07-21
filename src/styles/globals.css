@@ -54,7 +54,7 @@ a {
 
 .animation_show_top{
   opacity: 0;
-  transform: translateY(-50%);
+  transform: translateY(-10px);
 
   animation: var(--animation-show);
   animation-delay: .1s;

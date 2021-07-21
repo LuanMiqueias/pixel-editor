@@ -42,7 +42,7 @@ export const ColorPalette = () => {
       <div className={styles.colorPiker}>
         <ColorPicker
           color={color}
-          className="teste"
+          className={`${styles.colorPicker_component} animation_show_top`}
           onChange={(color) => {
             changeColor(color.hex);
             setColorsInput(color);
@@ -57,16 +57,24 @@ export const ColorPalette = () => {
             width: "100%",
           }}
         />
-      </div>
-      <div className={styles.container_pallet_color}>
-        {colors.map((color, index) => (
-          <Color color={color} key={`color_${color}_${index}`} />
-        ))}
-        <Color color="pick-color" click={addColor} />
+        <div className={styles.container_pallet_color}>
+          {colors.map((color, index) => (
+            <Color
+              color={color}
+              key={`color_${color}_${index}`}
+              delay={index + 10}
+            />
+          ))}
+          <Color
+            color="pick-color"
+            click={addColor}
+            delay={colors.length + 10}
+          />
+        </div>
       </div>
       <div className={styles.container_background_color}>
         <button
-          className={styles.background_color}
+          className={`${styles.background_color} animation_show_top`}
           style={{ background: color }}
           onClick={deleteCurrentColor}
         >
