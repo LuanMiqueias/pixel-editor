@@ -51,21 +51,25 @@ a {
     transform: initial;
   }
 }
+.animation_show_left{
+  opacity: 0;
+  transform: translateX(10px);
+
+  animation: var(--animation-show);
+}
 
 .animation_show_top{
   opacity: 0;
   transform: translateY(-10px);
 
   animation: var(--animation-show);
-  animation-delay: .1s;
-
 }
+
 .animation_show_bottom{
   opacity: 0;
   transform: translateY(50%);
 
   animation: var(--animation-show);
-  animation-delay: .2s;
 }
 .animation_show_opacity{
   opacity: 0;

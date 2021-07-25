@@ -29,22 +29,44 @@ export default function Signin() {
           onSubmit={() => {}}
         >
           {(formik) => (
-            <form onSubmit={() => {}} className={form.form}>
+            <form onSubmit={formik.handleSubmit} className={form.form}>
               <header>
                 <h1>Sign in</h1>
               </header>
               <main className={form.content_form}>
-                <InputField fieldName="name" type="text" text="name" />
-                <InputField fieldName="email" type="email" text="email" />
+                <InputField
+                  fieldName="name"
+                  type="text"
+                  placeholder="name"
+                  image="/user.svg"
+                  invalid={formik.touched.name && formik.errors.name && true}
+                  error={formik.errors.name}
+                  {...formik.getFieldProps("name")}
+                />
+                <InputField
+                  fieldName="email"
+                  type="email"
+                  placeholder="email"
+                  image="/email.svg"
+                  invalid={formik.touched.email && formik.errors.email && true}
+                  error={formik.errors.email}
+                  {...formik.getFieldProps("email")}
+                />
                 <InputField
                   fieldName="password"
                   type="password"
-                  text="password"
+                  placeholder="password"
+                  image="/password.svg"
+                  invalid={
+                    formik.touched.password && formik.errors.password && true
+                  }
+                  error={formik.errors.password}
+                  {...formik.getFieldProps("password")}
                 />
               </main>
-              <footer>
-                <button className={form.submit}>Enviar</button>
-              </footer>
+              <button className={form.submit} type="submit">
+                Enviar
+              </button>
             </form>
           )}
         </Formik>
