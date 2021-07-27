@@ -4,7 +4,10 @@ import { CanvasContext } from "./CanvasContext";
 interface IGlobalProviderProps {}
 interface IGlobalContextProps {
   message: { message?: string; type?: string };
-  showMessage: (message?: string, type?: string) => void;
+  showMessage: (
+    type: "login" | "save" | "error" | "waring",
+    message?: string
+  ) => void;
   loadImage: (
     image: HTMLImageElement,
     canvas: HTMLCanvasElement,
@@ -23,11 +26,12 @@ export const GlobalContextProvider: React.FC<IGlobalProviderProps> = ({
   });
 
   function showMessage(
-    type: "save" | "error" | "waring",
+    type: "login" | "save" | "error" | "waring",
     customMessage?: string
   ) {
     const messages = {
       initial: { message: "", type: "default" },
+      login: { message: "Login feito com sucesso!", type: "sucess" },
       save: { message: "Salvo com sucesso!", type: "sucess" },
       error: { message: "Tente novamente mais tarde", type: "error" },
       waring: { message: "Tente novamente mais tarde", type: "waring" },

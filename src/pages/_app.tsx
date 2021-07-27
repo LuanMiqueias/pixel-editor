@@ -1,4 +1,7 @@
 import Head from "next/head";
+import { WarningScreen } from "../components/warning-screen";
+import { GlobalContextProvider } from "../context/GlobalContext";
+import { UserProvider } from "../context/UserContext";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
@@ -7,11 +10,10 @@ function MyApp({ Component, pageProps }) {
       <Head>
         <link rel="shortcut icon" href="/favicon.png" type="image/png" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400&family=Press+Start+2P&display=swap"
+          href="https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@300;400;600;700&family=Press+Start+2P&display=swap"
           rel="stylesheet"
         ></link>
       </Head>
-      <img src="/logo.svg" alt="" className="logo" />
       <a
         href="https://github.com/LuanMiqueias/pixel-editor"
         target="_blank"
@@ -19,7 +21,13 @@ function MyApp({ Component, pageProps }) {
       >
         <img src="/github_logo.svg" alt="github" />
       </a>
-      <Component {...pageProps} />
+      <GlobalContextProvider>
+        <UserProvider>
+          <WarningScreen />
+
+          <Component {...pageProps} />
+        </UserProvider>
+      </GlobalContextProvider>
     </>
   );
 }

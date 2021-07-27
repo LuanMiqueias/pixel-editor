@@ -2,6 +2,7 @@
   position: absolute;
   top:32px;
   right: 32px;
+  z-index: 9999;
   width: 340px;
   height: 60px;
   border-radius: 5px;

@@ -1,19 +1,28 @@
 import Head from "next/head";
 import React from "react";
-import { ColorPalette } from "../components/colorPalette";
-import { Table } from "../components/canvas";
-import { Toolbar } from "../components/toolbar";
-import { WarningScreen } from "../components/warning-screen";
-import { ColorsProvider } from "../context/ColorsContext";
-import { ToolBarProvider } from "../context/ToolBarContext";
+import { ColorPalette } from "../../components/colorPalette";
+import { Table } from "../../components/canvas";
+import { Toolbar } from "../../components/toolbar";
+import { WarningScreen } from "../../components/warning-screen";
+import { ColorsProvider } from "../../context/ColorsContext";
+import { ToolBarProvider } from "../../context/ToolBarContext";
 
-import styles from "../styles/Editor.module.css";
-import { CanvasProvider } from "../context/CanvasContext";
-import { Preview } from "../components/preview";
-import { GlobalContextProvider } from "../context/GlobalContext";
-import { MenuProvider } from "../context/MenuContext";
+import styles from "../../styles/Editor.module.css";
+import { CanvasProvider } from "../../context/CanvasContext";
+import { Preview } from "../../components/preview";
+import {
+  GlobalContext,
+  GlobalContextProvider,
+} from "../../context/GlobalContext";
+import { MenuProvider } from "../../context/MenuContext";
+import { useRouter } from "next/router";
 
 export default function Home() {
+  const {} = React.useContext(GlobalContext);
+  const router = useRouter();
+  React.useEffect(() => {
+    if (!router.query?.id) return;
+  }, []);
   return (
     <div className={styles.container}>
       <Head>

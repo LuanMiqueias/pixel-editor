@@ -1,6 +1,8 @@
+import Link from "next/link";
 import React from "react";
 import { CanvasContext } from "../../context/CanvasContext";
 import { GlobalContext } from "../../context/GlobalContext";
+import { UserContext } from "../../context/UserContext";
 import styles from "./styles.module.css";
 
 interface IPropsTable {
@@ -33,9 +35,19 @@ export const Preview = () => {
     element.download = "pixelArt.png";
     element.click();
   }
+  const { auth, user } = React.useContext(UserContext);
   return (
     <div className={`${styles.container} animation_opacity`}>
       <div className={styles.content}>
+        {auth ? (
+          <Link href="/editor">
+            <a className={styles.button_user_enable}>My account</a>
+          </Link>
+        ) : (
+          <Link href="/signin">
+            <a className={styles.button_user}>Login</a>
+          </Link>
+        )}
         <div className={styles.container_canvas}>
           <p>Preview</p>
           <canvas

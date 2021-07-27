@@ -21,7 +21,7 @@ export default function Home() {
           <p>Crie pixel arts incriveis</p>
         </div>
         <div className={`${styles.btn_start} animation_show_bottom`}>
-          <Link href="/create">START</Link>
+          <Link href="/editor">START</Link>
         </div>
       </main>
       <footer className="animation_show_bottom">

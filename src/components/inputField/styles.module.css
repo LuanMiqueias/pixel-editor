@@ -22,15 +22,27 @@
 }
 .inputField input{
   flex:1;
+  height: 100%;
   display: flex;
   border: none;
-  border-radius: 3px;
   background: none;
   outline: none;
   color:#eeeeee;
   font-weight: 300;
   font-size: 1rem;
   padding: 0 1rem;
+  box-shadow: 0 0 0 30px #303030 inset;
+}
+.inputField input::before{
+  content: '';
+  position: absolute;
+  top:0;
+  left:0;
+  z-index: 1000;
+  width: 100%;
+  padding: 400px;
+  height:100%;
+  background: #000;
 }
 .input_block{
   height: 100%;
@@ -51,6 +63,7 @@
 }
 .image img{
   height: 100%;
+  width: 24px;
   opacity: .6;
 }
 .image::before{

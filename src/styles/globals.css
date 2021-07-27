@@ -7,6 +7,7 @@ body {
 }
   body{
     overflow-x: hidden;
+    background: #202020;
   }
 a {
   color: inherit;
@@ -26,8 +27,8 @@ a {
 
   --title-light:#fff;
   --text-light:#F5F5F5;
-  --link:#4574A0;
-  --link-hover:#286094;
+  --link:#286094;
+  --link-hover:#184c7c;
   --link-disabled:#738392;
 
   --animation-show:show forwards .3s;
@@ -78,15 +79,18 @@ a {
 
 .github_link{
   position: absolute;
-  top:0;
-  right: 0;
-  margin:24px 32px;
+  bottom:0;
+  left: 0;
+  margin:16px 24px;
 
   transition: all .2s;
   
   opacity: 0;
   transform: translateY(-20px);
   animation: var(--animation-show);
+}
+.github_link img{
+  height: 24px;
 }
 
 .github_link:hover{
@@ -96,11 +100,39 @@ a {
 }
 
 .logo{
-  width: 180px;
+  width: 130px;
   position: absolute;
   top:32px;
   left:32px
 }
+.content{
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.page_container{
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+.loading{
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-radius: 15px;
+  border:2px solid transparent;
+  border-top:2px solid rgba(255, 255, 255, 0.4);
+  border-bottom:2px solid rgba(255, 255, 255, 0.4);
+
+  animation: loading .6s infinite linear;
+}
+@keyframes loading {
+  to{
+    transform: rotateZ(360deg);
+  }
+}
+
 @keyframes show {
   to{
     opacity: 1;

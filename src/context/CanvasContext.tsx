@@ -4,6 +4,7 @@ import { NavMainToolbar } from "../components/menu/navMainToolbar";
 import { NavPincel } from "../components/menu/NavPincel";
 import { GlobalContext } from "./GlobalContext";
 import { MenuContext } from "./MenuContext";
+import { UserContext } from "./UserContext";
 
 interface IPropsProjects {
   title: string;
@@ -36,6 +37,7 @@ interface ICanvasContext {
   redo: () => void;
   saveState: () => void;
   loadImageInCanvas: (image: HTMLImageElement) => void;
+  renderArt: (id: string) => void;
 }
 
 export const CanvasContext = React.createContext({} as ICanvasContext);
@@ -68,6 +70,7 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
 
   const { showMessage, loadImage } = React.useContext(GlobalContext);
   const { closeNav } = React.useContext(MenuContext);
+  const { arts } = React.useContext(UserContext);
 
   const save = React.useCallback(() => {
     if (!canvasGrid.canvas || !canvasConfig.canvas) return;
@@ -308,6 +311,10 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
       save();
     };
   }
+
+  function renderArt(id: string) {
+    console.log(arts.find((art) => art._id === id));
+  }
   return (
     <CanvasContext.Provider
       value={{
@@ -329,6 +336,7 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
         resetCells,
         saveCells,
         loadImageInCanvas,
+        renderArt,
       }}
     >
       {children}

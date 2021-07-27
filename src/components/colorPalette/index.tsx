@@ -3,6 +3,7 @@ import styles from "./styles.module.css";
 import { Color } from "./colors-item";
 import ColorPicker from "react-pick-color";
 import { ColorsContext } from "../../context/ColorsContext";
+import { UserContext } from "../../context/UserContext";
 
 export const ColorPalette = () => {
   const [colors, setColors] = React.useState([
@@ -19,6 +20,7 @@ export const ColorPalette = () => {
     "#11A466",
     "#371383",
   ]);
+
   function addColor(color: string) {
     if (colors.find((color_item) => color === color_item)) return;
     setColors([...colors, color]);
@@ -37,6 +39,12 @@ export const ColorPalette = () => {
   }
   const { color, changeColor } = React.useContext(ColorsContext);
   const [colorsInput, setColorsInput] = React.useState<IColorsInput>();
+  const { selectedIDArt, user } = React.useContext(UserContext);
+  React.useEffect(() => {
+    if (!selectedIDArt || !user) return;
+    setColors(user?.arts?.find((art) => art._id == selectedIDArt).colors);
+  }, [selectedIDArt, user]);
+
   return (
     <div className={`${styles.palette} animation_show_opacity`}>
       <div className={styles.colorPiker}>
