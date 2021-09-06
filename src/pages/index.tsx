@@ -2,6 +2,7 @@ import React from "react";
 import Head from "next/head";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
+import { CleanLayout } from "../layouts/clean";
 
 export default function Home() {
   return (
@@ -35,3 +36,5 @@ export default function Home() {
     </div>
   );
 }
+
+Home.getLayout = (page: React.ReactNode) => <CleanLayout children={page} />

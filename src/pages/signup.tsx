@@ -8,8 +8,9 @@ import { InputField } from "../components/inputField";
 import api from "../services/api";
 import { UserContext } from "../context/UserContext";
 import Link from "next/link";
+import { CleanLayout } from "../layouts/clean";
 
-export default function Signin() {
+export default function Signup() {
   const { auth, signin } = React.useContext(UserContext);
   return (
     <div className={styles.container}>
@@ -90,3 +91,5 @@ export default function Signin() {
     </div>
   );
 }
+
+Signup.getLayout = (page: React.ReactNode) => <CleanLayout children={page} />

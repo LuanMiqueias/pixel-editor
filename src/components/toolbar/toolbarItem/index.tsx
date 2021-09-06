@@ -7,7 +7,7 @@ import styles from "./styles.module.css";
 
 interface IPropsToolBarItem {
   type: string;
-  img?: string;
+  img?: JSX.Element;
   text?: string;
   hover?: string;
   hasMenu?: boolean;
@@ -56,35 +56,7 @@ export const ToolbarItem = ({
       onClick={() => handleClick()}
     >
       <div className={`${styles.content_item} `}>
-        {img ? (
-          type === toolSeleted || isActive ? (
-            <img
-              src={hover ? hover : img}
-              alt={type}
-              style={maxWidth && { maxWidth: maxWidth }}
-            />
-          ) : (
-            <img
-              src={img}
-              alt={type}
-              style={maxWidth && { maxWidth: maxWidth }}
-            />
-          )
-        ) : (
-          <>
-            {hover && isActive ? (
-              <img
-                src={hover ? hover : img}
-                alt={type}
-                style={maxWidth && { maxWidth: maxWidth }}
-              />
-            ) : (
-              <div className={styles.text}>
-                <p>{text}</p>
-              </div>
-            )}
-          </>
-        )}
+        {img}
       </div>
       {hasMenu && isActive && <Menu />}
     </div>

@@ -1,98 +1,98 @@
-.container{
+.container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  background-color: #202020;
+  background-color: #212121;
   overflow: hidden;
 }
 
-.container main{
-  flex:1;
-  display:flex;
+.container main {
+  flex: 1;
+  display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap:32px;
+  gap: 32px;
 
-  animation:  var(--animation-show);
+  animation: var(--animation-show);
 }
-.title{
-  display:flex;
+.title {
+  display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  gap:12px;
-  color:var(--text-light);
+  gap: 12px;
+  color: var(--text-light);
   font-weight: 300;
 
-  animation:  var(--animation-show);
+  animation: var(--animation-show);
   /* transform: translateY(-100px); */
 }
-.title h1{
+.title h1 {
   font-weight: 500;
-  font-family: 'Press Start 2P', cursive;
-  color:var(--primary-color);
+  font-family: "Press Start 2P", cursive;
+  color: var(--primary-color);
   margin: 0;
   letter-spacing: -2px;
 }
-.title p{
+.title p {
   margin: 0;
 }
-.title h1 span{
+.title h1 span {
   font-family: inherit;
-  color:var(--title-light)
+  color: var(--title-light);
 }
-.btn_start{
+.btn_start {
   width: 100%;
   max-width: 200px;
 
-  transition: all .4s;
+  transition: all 0.4s;
 
-  animation:  var(--animation-show);
+  animation: var(--animation-show);
   /* transform: translateY(100px); */
 }
-.btn_start a{
+.btn_start a {
   padding: 16px 44px;
   padding-top: 18px;
   border-radius: 5px;
   background: var(--primary-color);
 
-  font-family: 'Press Start 2P', cursive;
-  color:var(--text-light);
-  font-size: .88rem;
-  letter-spacing: .05rem;
+  font-family: "Press Start 2P", cursive;
+  color: var(--text-light);
+  font-size: 0.88rem;
+  letter-spacing: 0.05rem;
 
-  display:flex;
+  display: flex;
   align-items: center;
   justify-content: center;
 }
-.btn_start:hover{
-  transition: all .1s;
+.btn_start:hover {
+  transition: all 0.1s;
   max-width: 250px;
 }
 
-.container footer{
+.container footer {
   animation: var(--animation-show);
 }
-.container footer p{
+.container footer p {
   font-weight: 300;
   display: flex;
-  gap:6px;
-  color:var(--text-light)
+  gap: 6px;
+  color: var(--text-light);
 }
-.container footer a{
-  color:var(--link);
+.container footer a {
+  color: var(--link);
   font-weight: 500;
 }
 
-@media (max-width:768px) {
-  .title h1{
+@media (max-width: 768px) {
+  .title h1 {
     font-size: 1.25rem;
   }
   .container footer p,
-  .container footer a{
-    font-size: .88rem;
+  .container footer a {
+    font-size: 0.88rem;
   }
 }

@@ -1,0 +1,12 @@
+.content {
+  display: flex;
+}
+.container_toolbar {
+  width: 50px;
+  background: var(--black);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 24px;
+}

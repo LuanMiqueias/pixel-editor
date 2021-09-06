@@ -1,0 +1,50 @@
+.container {
+  width: 100%;
+  display: flex;
+  background: var(--black);
+  height: 50px;
+}
+.content {
+  padding: 0 64px;
+  display: flex;
+  align-items: center;
+  gap: 44px;
+}
+.logo svg {
+  max-height: 8px;
+  height: 100%;
+  width: 100%;
+}
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  height: 100%;
+}
+.nav button {
+  height: 100%;
+  padding: 0 1rem;
+  background: none;
+  border: none;
+  color: var(--text);
+  text-transform: uppercase;
+  font-size: 10px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+}
+
+.nav button:hover {
+  color: var(--text-light);
+  border-bottom: 1px solid var(--secundary-color);
+}
+
+button.button_export {
+  min-width: 150px;
+  color: var(--text-light);
+  background: var(--secundary-color);
+}
+button.button_export:hover {
+  background: var(--secundary-color-hover);
+  border-bottom: 1px solid transparent;
+}

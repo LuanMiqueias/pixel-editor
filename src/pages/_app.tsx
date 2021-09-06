@@ -2,9 +2,12 @@ import Head from "next/head";
 import { WarningScreen } from "../components/warning-screen";
 import { GlobalContextProvider } from "../context/GlobalContext";
 import { UserProvider } from "../context/UserContext";
+import { DefaultLayout } from "../layouts/default";
 import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
+  const Layout = Component.layout || (({ children }) => children);
+  const getLayout = Component.getLayout || ((page) => <DefaultLayout children={page} />)
   return (
     <>
       <Head>
@@ -14,18 +17,17 @@ function MyApp({ Component, pageProps }) {
           rel="stylesheet"
         ></link>
       </Head>
-      <a
+      {/* <a
         href="https://github.com/LuanMiqueias/pixel-editor"
         target="_blank"
         className="github_link"
       >
         <img src="/github_logo.svg" alt="github" />
-      </a>
+      </a> */}
       <GlobalContextProvider>
         <UserProvider>
           <WarningScreen />
-
-          <Component {...pageProps} />
+          {getLayout(<Component {...pageProps} />)}
         </UserProvider>
       </GlobalContextProvider>
     </>

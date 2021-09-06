@@ -10,6 +10,7 @@ import { UserContext } from "../context/UserContext";
 import { GlobalContext } from "../context/GlobalContext";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import { CleanLayout } from "../layouts/clean";
 
 export default function Signin() {
   const { signin, changeLoading, changeToken, loading } =
@@ -84,3 +85,4 @@ export default function Signin() {
     </div>
   );
 }
+Signin.getLayout = (page: React.ReactNode) => <CleanLayout children={page} />

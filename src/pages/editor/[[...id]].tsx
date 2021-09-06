@@ -16,9 +16,10 @@ import {
 } from "../../context/GlobalContext";
 import { MenuProvider } from "../../context/MenuContext";
 import { useRouter } from "next/router";
+import { EditorLayout } from "../../layouts/editor";
 
-export default function Home() {
-  const {} = React.useContext(GlobalContext);
+export default function Editor() {
+  const { } = React.useContext(GlobalContext);
   const router = useRouter();
   React.useEffect(() => {
     if (!router.query?.id) return;
@@ -32,10 +33,10 @@ export default function Home() {
           rel="stylesheet"
         ></link>
       </Head>
-      <h1 className={`animation_show_top`}>
+      {/* <h1 className={`animation_show_top`}>
         <img src="./logo.svg" alt="" />{" "}
         <span>um simples editor de pixel arts</span>
-      </h1>
+      </h1> */}
       <h2 className={styles.moblie_waring}>
         Não há suporte para telas menores que <br /> <span>768px</span>
       </h2>
@@ -44,7 +45,19 @@ export default function Home() {
           <CanvasProvider>
             <ColorsProvider>
               <ToolBarProvider>
-                <main className={`${styles.content} animation_show_opacity`}>
+                <WarningScreen />
+                <main className={`${styles.content}`}>
+                  <div className={styles.container_toolbar}>
+                    <Toolbar />
+                  </div>
+                  <div className={`${styles.container_canvas} animation_show_opacity`}>
+                    <Table />
+                  </div>
+                  <div className={styles.container_canvasConfig}>
+                    <Preview />
+                  </div>
+                </main>
+                {/* <main className={`${styles.content} animation_show_opacity`}>
                   <div className={styles.column}>
                     <WarningScreen />
                     <ColorPalette />
@@ -58,7 +71,7 @@ export default function Home() {
                   <div className={styles.column}>
                     <Preview />
                   </div>
-                </main>
+                </main> */}
               </ToolBarProvider>
             </ColorsProvider>
           </CanvasProvider>
@@ -67,3 +80,5 @@ export default function Home() {
     </div>
   );
 }
+
+Editor.getLayout = (page: React.ReactNode) => <EditorLayout children={page} />

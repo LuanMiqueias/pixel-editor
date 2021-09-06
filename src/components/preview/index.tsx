@@ -39,7 +39,7 @@ export const Preview = () => {
   return (
     <div className={`${styles.container} animation_opacity`}>
       <div className={styles.content}>
-        {auth ? (
+        {/* {auth ? (
           <Link href="/editor">
             <a className={styles.button_user_enable}>My account</a>
           </Link>
@@ -47,17 +47,17 @@ export const Preview = () => {
           <Link href="/signin">
             <a className={styles.button_user}>Login</a>
           </Link>
-        )}
+        )} */}
         <div className={styles.container_canvas}>
           <p>Preview</p>
           <canvas
             ref={canvas}
             className={`${styles.canvas}`}
-            height="180px"
-            width="180px"
+            height="300px"
+            width="300px"
           />
         </div>
-        <div className={styles.container_input_block}>
+        {/* <div className={styles.container_input_block}>
           <button
             className={styles.button_download}
             onClick={download}
@@ -82,7 +82,7 @@ export const Preview = () => {
               }}
             />
           </label>
-        </div>
+        </div> */}
       </div>
     </div>
   );
