@@ -1,145 +1,145 @@
 html,
 body {
-  padding: 0;
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+	padding: 0;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+		Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 body {
-  overflow-x: hidden;
-  background: #212121;
+	overflow-x: hidden;
+	background: #212121;
 }
 a {
-  color: inherit;
-  text-decoration: none;
+	color: inherit;
+	text-decoration: none;
 }
 
 * {
-  box-sizing: border-box;
-  font-family: "Josefin Sans", sans-serif;
+	box-sizing: border-box;
+	font-family: "Josefin Sans", sans-serif;
 }
 
 :root {
-  --primary-color: #dd2929;
-  --primary-color-hover: #c01f1f;
-  --secundary-color: #298ec9;
-  --secundary-color-hover: #016aa7;
+	--primary-color: #dd2929;
+	--primary-color-hover: #c01f1f;
+	--secundary-color: #298ec9;
+	--secundary-color-hover: #016aa7;
 
-  --black: #1b1b1b;
+	--black: #1b1b1b;
 
-  --title-light: #fff;
-  --text: #bdbdbd;
-  --text-light: #d4d4d4;
-  --link: #286094;
-  --link-hover: #184c7c;
-  --link-disabled: #738392;
+	--title-light: #fff;
+	--text: #bdbdbd;
+	--text-light: #d4d4d4;
+	--link: #286094;
+	--link-hover: #184c7c;
+	--link-disabled: #738392;
 
-  --item-toolbar: #989898;
-  --animation-show: show forwards 0.3s;
-  --menu-item-active: #298ec9;
+	--item-toolbar: #989898;
+	--animation-show: show forwards 0.3s;
+	--menu-item-active: #298ec9;
 
-  --menu-item-default: rgba(255, 255, 255, 0.1);
+	--menu-item-default: rgba(255, 255, 255, 0.1);
 
-  --menu-item-danger: rgba(221, 30, 40, 0.9);
+	--menu-item-danger: rgba(221, 30, 40, 0.9);
 
-  --menu-item-text-danger: #fff;
+	--menu-item-text-danger: #fff;
 
-  --message-default: #11c7ff;
-  --message-sucess: #54df92;
-  --message-error: #dd1e28;
-  --message-waring: #d4c928;
+	--message-default: #11c7ff;
+	--message-sucess: #54df92;
+	--message-error: #dd1e28;
+	--message-waring: #d4c928;
 }
 
 @keyframes show {
-  to {
-    opacity: 1;
-    transform: initial;
-  }
+	to {
+		opacity: 1;
+		transform: initial;
+	}
 }
 .animation_show_left {
-  opacity: 0;
-  transform: translateX(10px);
+	opacity: 0;
+	transform: translateX(10px);
 
-  animation: var(--animation-show);
+	animation: var(--animation-show);
 }
 
 .animation_show_top {
-  opacity: 0;
-  transform: translateY(-10px);
+	opacity: 0;
+	transform: translateY(-10px);
 
-  animation: var(--animation-show);
+	animation: var(--animation-show);
 }
 
 .animation_show_bottom {
-  opacity: 0;
-  transform: translateY(50%);
+	opacity: 0;
+	transform: translateY(50%);
 
-  animation: var(--animation-show);
+	animation: var(--animation-show);
 }
 .animation_show_opacity {
-  opacity: 0;
-  animation: var(--animation-show);
+	opacity: 0;
+	animation: var(--animation-show);
 }
 
 .github_link {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  margin: 16px 24px;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	margin: 16px 24px;
 
-  transition: all 0.2s;
+	transition: all 0.2s;
 
-  opacity: 0;
-  transform: translateY(-20px);
-  animation: var(--animation-show);
+	opacity: 0;
+	transform: translateY(-20px);
+	animation: var(--animation-show);
 }
 .github_link img {
-  height: 24px;
+	height: 24px;
 }
 
 .github_link:hover {
-  transition: all 0.1s;
-  opacity: 0.8 !important;
-  transform: scale(1.1) !important;
+	transition: all 0.1s;
+	opacity: 0.8 !important;
+	transform: scale(1.1) !important;
 }
 
 .logo {
-  width: 130px;
-  position: absolute;
-  top: 32px;
-  left: 32px;
+	width: 130px;
+	position: absolute;
+	top: 32px;
+	left: 32px;
 }
 .content {
-  max-width: 1200px;
-  margin: 0 auto;
+	max-width: 1200px;
+	margin: 0 auto;
 }
 
 .page_container {
-  display: flex;
-  width: 100%;
-  align-items: center;
-  justify-content: space-between;
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: space-between;
 }
 .loading {
-  display: block;
-  width: 20px;
-  height: 20px;
-  border-radius: 15px;
-  border: 2px solid transparent;
-  border-top: 2px solid rgba(255, 255, 255, 0.4);
-  border-bottom: 2px solid rgba(255, 255, 255, 0.4);
+	display: block;
+	width: 20px;
+	height: 20px;
+	border-radius: 15px;
+	border: 2px solid transparent;
+	border-top: 2px solid rgba(255, 255, 255, 0.4);
+	border-bottom: 2px solid rgba(255, 255, 255, 0.4);
 
-  animation: loading 0.6s infinite linear;
+	animation: loading 0.6s infinite linear;
 }
 @keyframes loading {
-  to {
-    transform: rotateZ(360deg);
-  }
+	to {
+		transform: rotateZ(360deg);
+	}
 }
 
 @keyframes show {
-  to {
-    opacity: 1;
-    transform: initial;
-  }
+	to {
+		opacity: 1;
+		transform: initial;
+	}
 }

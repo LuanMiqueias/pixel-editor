@@ -4,6 +4,7 @@ import { GlobalContextProvider } from "../context/GlobalContext";
 import { UserProvider } from "../context/UserContext";
 import { DefaultLayout } from "../layouts/default";
 import "../styles/globals.css";
+import '../styles/react-colorful.css';
 
 function MyApp({ Component, pageProps }) {
   const Layout = Component.layout || (({ children }) => children);

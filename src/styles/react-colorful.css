@@ -1,0 +1,19 @@
+.react-colorful {
+	height: 250px !important;
+	width: 100% !important;
+}
+.react-colorful * {
+	border-radius: 3px !important;
+}
+.react-colorful__saturation {
+	height: 20px !important;
+
+	border-radius: 4px 4px 0 0;
+}
+.react-colorful__last-control {
+	height: 12px !important;
+}
+.react-colorful__pointer {
+	height: 12px !important;
+	width: 12px !important;
+}

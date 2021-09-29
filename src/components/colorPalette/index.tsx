@@ -1,10 +1,11 @@
 import React from "react";
 import styles from "./styles.module.css";
 import { Color } from "./colors-item";
-import ColorPicker from "react-pick-color";
+import { icons } from '../../icons'
+// import ColorPicker from "react-pick-color";
+import { HexColorPicker, RgbaColorPicker, RgbaColor } from 'react-colorful';
 import { ColorsContext } from "../../context/ColorsContext";
 import { UserContext } from "../../context/UserContext";
-
 export const ColorPalette = () => {
   const [colors, setColors] = React.useState([
     "#041B3E",
@@ -48,7 +49,10 @@ export const ColorPalette = () => {
   return (
     <div className={`${styles.palette} animation_show_opacity`}>
       <div className={styles.colorPiker}>
-        <ColorPicker
+        <HexColorPicker className={styles.colorPikerContainer} color={color} onChange={(color) => {
+          changeColor(color);
+        }} />
+        {/* <ColorPicker
           color={color}
           className={`${styles.colorPicker_component} animation_show_top`}
           onChange={(color) => {
@@ -64,7 +68,7 @@ export const ColorPalette = () => {
             color: "white",
             width: "100%",
           }}
-        />
+        /> */}
         <div className={styles.container_pallet_color}>
           {colors.map((color, index) => (
             <Color
@@ -83,11 +87,13 @@ export const ColorPalette = () => {
       <div className={styles.container_background_color}>
         <button
           className={`${styles.background_color} animation_show_top`}
-          style={{ background: color }}
+          style={{ background: color, fill: color }}
           onClick={deleteCurrentColor}
         >
           {colors.find((item) => item === color) && (
-            <img src="/delete_light.svg" alt="" />
+            <span className={styles.icon_delete_color}>
+              {icons.delete_color}
+            </span>
           )}
         </button>
       </div>
