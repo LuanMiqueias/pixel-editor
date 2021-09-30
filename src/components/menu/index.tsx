@@ -7,8 +7,8 @@ export const Menu: React.FC = () => {
 
   return (
     <nav className={`${styles.container}`}>
-      {navsToolbar.navs[navsToolbar.activeCurrent] &&
-        navsToolbar.navs[navsToolbar.activeCurrent].content}
+
+      {!navsToolbar.activeCurrent ? navsToolbar.default.map(item => navsToolbar.navs[item]?.content) : navsToolbar.activeCurrent.map(item => navsToolbar.navs[item]?.content)}
     </nav>
   );
 };

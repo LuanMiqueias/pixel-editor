@@ -15,21 +15,24 @@ export const NavPincel = () => {
     { name: "6", size: 6 },
   ];
   return (
-    <div className={styles.content}>
-      {menuItems.map((item, index) => (
-        <div
-          key={item.name}
-          className={`${styles.item_menu} animation_show_top`}
-          onClick={() => changeSizePixel(item.size)}
-          style={{
-            background: sizePixel === item.size && `var(--secundary-color)`,
-            color: sizePixel === item.size && `var(--text-light)`,
-            animationDelay: `${index / 40}s`,
-          }}
-        >
-          {item.name}
-        </div>
-      ))}
+    <div className={styles.container}>
+      <h2>Brush width</h2>
+      <div className={styles.content}>
+        {menuItems.map((item, index) => (
+          <div
+            key={item.name}
+            className={`${styles.item_menu} animation_show_top`}
+            onClick={() => changeSizePixel(item.size)}
+            style={{
+              background: sizePixel === item.size && `var(--secundary-color)`,
+              color: sizePixel === item.size && `var(--text-light)`,
+              animationDelay: `${index / 40}s`,
+            }}
+          >
+            {item.name}
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

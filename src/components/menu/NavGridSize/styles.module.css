@@ -1,39 +1,47 @@
-
-.content{
-  width:80px;
-  display:flex;
-  flex-wrap: wrap;
-  gap:4px
+.container {
+	width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	flex-direction: column;
+	gap: 4px;
 }
-.item_menu{
-  flex-basis: calc(50% - 4px);
-  height: 30px;
-  display:flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  text-transform: capitalize;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: all .2s;
-  background: var(--menu-item-default);
-  color:var(--text-light);
-  border: 2px solid transparent;
-  font-size:.88rem;
+.container h2 {
+	font-weight: 400;
+	color: var(--text-light);
+	font-size: 0.625rem;
+	margin: 0 0 4px 0;
+	text-transform: uppercase;
 }
-.item_menu:hover{
-  transition: all .1s;
-  border-color:var(--secundary-color)
-
+.content {
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(20px, calc(25% - 8px)));
+	gap: 4px;
 }
-
+.item_menu {
+	height: 30px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	text-align: center;
+	border-radius: 3px;
+	cursor: pointer;
+	transition: all 0.2s;
+	background: var(--menu-item-default);
+	color: var(--text-light);
+	border: 2px solid transparent;
+	font-size: 0.77rem;
+}
+.item_menu:hover {
+	transition: all 0.1s;
+	border-color: var(--secundary-color);
+}
 
 .container::-webkit-scrollbar {
-  width: 4px;
-}
- 
-.container::-webkit-scrollbar-thumb {
-  background: var(--secundary-color); 
-  border-radius: 10px;
+	width: 4px;
 }
 
+.container::-webkit-scrollbar-thumb {
+	background: var(--secundary-color);
+	border-radius: 10px;
+}

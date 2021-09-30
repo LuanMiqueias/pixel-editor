@@ -38,6 +38,7 @@ interface ICanvasContext {
   saveState: () => void;
   loadImageInCanvas: (image: HTMLImageElement) => void;
   renderArt: (id: string) => void;
+  downloadCanvas: () => void;
 }
 
 export const CanvasContext = React.createContext({} as ICanvasContext);
@@ -69,7 +70,6 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
   const [history, setHistory] = React.useState([""]);
 
   const { showMessage, loadImage } = React.useContext(GlobalContext);
-  const { closeNav } = React.useContext(MenuContext);
   const { arts } = React.useContext(UserContext);
 
   const save = React.useCallback(() => {
@@ -130,13 +130,10 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
 
   function changeGridSize(size) {
     setSize(size);
-
-    closeNav();
   }
 
   function changeSizePixel(value) {
     setSizePixel(value);
-    closeNav();
   }
   function paintCell(coordinates: { x: number; y: number }, color: string) {
     if (!canvasConfig.canvas) {
@@ -315,6 +312,15 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
   function renderArt(id: string) {
     console.log(arts.find((art) => art._id === id));
   }
+  function downloadCanvas() {
+    if (canvasIsBlank) return;
+
+    let element = document.createElement("a");
+    element.href = preview && preview;
+    element.download = "pixelArt.png";
+    element.click();
+    element.remove();
+  }
   return (
     <CanvasContext.Provider
       value={{
@@ -337,6 +343,7 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
         saveCells,
         loadImageInCanvas,
         renderArt,
+        downloadCanvas
       }}
     >
       {children}

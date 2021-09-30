@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const api = axios.create({
-  baseURL: "https://pixel-editor-dev.herokuapp.com/",
+  baseURL: "http://localhost:3030/",
 });
 
 export default api;

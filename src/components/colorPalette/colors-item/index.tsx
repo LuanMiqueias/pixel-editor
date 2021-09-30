@@ -27,9 +27,8 @@ export const Color = ({ color, delay, click }: IPropsToolBarItem) => {
         ></div>
       ) : (
         <div
-          className={`${styles.item} animation_show_top ${
-            colorSelect === color && styles.item_active
-          }`}
+          className={`${styles.item} animation_show_top ${colorSelect === color && styles.item_active
+            }`}
           style={{ background: color, animationDelay: `.${delay}s` }}
           onClick={() => {
             changeColor(color);

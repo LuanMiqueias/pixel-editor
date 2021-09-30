@@ -48,42 +48,6 @@ export const ColorPalette = () => {
 
   return (
     <div className={`${styles.palette} animation_show_opacity`}>
-      <div className={styles.colorPiker}>
-        <HexColorPicker className={styles.colorPikerContainer} color={color} onChange={(color) => {
-          changeColor(color);
-        }} />
-        {/* <ColorPicker
-          color={color}
-          className={`${styles.colorPicker_component} animation_show_top`}
-          onChange={(color) => {
-            changeColor(color.hex);
-            setColorsInput(color);
-          }}
-          hideAlpha
-          theme={{
-            background: "rgba(0,0,0,0)",
-            inputBackground: "rgba(255, 255, 255, 0.1)",
-            borderColor: "none",
-            borderRadius: "3px",
-            color: "white",
-            width: "100%",
-          }}
-        /> */}
-        <div className={styles.container_pallet_color}>
-          {colors.map((color, index) => (
-            <Color
-              color={color}
-              key={`color_${color}_${index}`}
-              delay={index + 10}
-            />
-          ))}
-          <Color
-            color="pick-color"
-            click={addColor}
-            delay={colors.length + 10}
-          />
-        </div>
-      </div>
       <div className={styles.container_background_color}>
         <button
           className={`${styles.background_color} animation_show_top`}
@@ -97,6 +61,26 @@ export const ColorPalette = () => {
           )}
         </button>
       </div>
+      <div className={styles.colorPiker}>
+        <HexColorPicker className={styles.colorPikerContainer} color={color} onChange={(color) => {
+          changeColor(color);
+        }} />
+        <div className={styles.container_pallet_color}>
+          {colors.map((color, index) => (
+            <Color
+              color={color}
+              key={`color_${color}_${index}`}
+              delay={index + 10}
+            />
+          ))}
+          <Color
+            color="pick-color"
+            click={addColor}
+            delay={colors.length / 5}
+          />
+        </div>
+      </div>
+
     </div>
   );
 };

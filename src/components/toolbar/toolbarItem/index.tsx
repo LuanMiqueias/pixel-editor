@@ -9,7 +9,7 @@ interface IPropsToolBarItem {
   type: string;
   img?: JSX.Element;
   text?: string;
-  hover?: string;
+  hover?: JSX.Element;
   hasMenu?: boolean;
   maxWidth?: string;
   disabled?: boolean;
@@ -56,9 +56,9 @@ export const ToolbarItem = ({
       onClick={() => handleClick()}
     >
       <div className={`${styles.content_item} `}>
-        {img}
+        {isActive ? hover : img}
       </div>
-      {hasMenu && isActive && <Menu />}
+      {/* {hasMenu && isActive && <Menu />} */}
     </div>
   );
 };

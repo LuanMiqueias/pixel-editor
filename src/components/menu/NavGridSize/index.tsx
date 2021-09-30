@@ -14,21 +14,24 @@ export const NavGridSize = () => {
     { name: "128", size: 128 },
   ];
   return (
-    <div className={styles.content}>
-      {menuItems.map((item, index) => (
-        <div
-          key={item.name}
-          className={`${styles.item_menu} animation_show_top`}
-          onClick={() => changeGridSize(item.size)}
-          style={{
-            background: size === item.size && `var(--secundary-color)`,
-            color: size === item.size && `var(--text-light)`,
-            animationDelay: `${index / 40}s`,
-          }}
-        >
-          {item.name}
-        </div>
-      ))}
+    <div className={styles.container}>
+      <h2> grid size</h2>
+      <div className={styles.content}>
+        {menuItems.map((item, index) => (
+          <div
+            key={item.name}
+            className={`${styles.item_menu} animation_show_top`}
+            onClick={() => changeGridSize(item.size)}
+            style={{
+              background: size === item.size && `var(--secundary-color)`,
+              color: size === item.size && `var(--text-light)`,
+              animationDelay: `${index / 40}s`,
+            }}
+          >
+            {item.name}px
+          </div>
+        ))}
+      </div>
     </div>
   );
 };

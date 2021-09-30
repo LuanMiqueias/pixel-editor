@@ -5,44 +5,45 @@ import { NavPincel } from "../components/menu/NavPincel";
 
 export function useNavToolbar() {
   const [navsToolbar, setNavsToolbar] = React.useState({
-    activeCurrent: "",
+    default: ['sizePixel'],
+    activeCurrent: null,
     navs: {
       sizePixel: {
         name: "sizePixel",
-        content: <NavPincel />,
+        content: <NavPincel key="sizePixel" />,
       },
       main: {
         name: "main",
-        content: <NavMainToolbar />,
+        content: <NavMainToolbar key="main" />,
       },
       gridSize: {
         name: "gridSize",
-        content: <NavGridSize />,
+        content: <NavGridSize key="gridSize" />,
       },
     },
   });
-  function toogleMenuToolbar(name: string) {
-    if (!navsToolbar.navs[name]) return;
-
-    if (navsToolbar.activeCurrent === name) {
-      setNavsToolbar({
-        ...navsToolbar,
-        activeCurrent: "",
-      });
-    } else {
-      setNavsToolbar({
-        ...navsToolbar,
-        activeCurrent: name,
-      });
-    }
-  }
-
-  function closeNav() {
+  function toogleMenuToolbar(names: string[]) {
+    const nameExists = names?.filter(item => navsToolbar.navs[item]);
+    if (!nameExists) return;
+    console.log(nameExists)
     setNavsToolbar({
       ...navsToolbar,
-      activeCurrent: "",
+      activeCurrent: nameExists,
     });
+
+    // if (navsToolbar.activeCurrent.filter(item => navsToolbar.navs[item])) {
+    //   setNavsToolbar({
+    //     ...navsToolbar,
+    //     activeCurrent: [""],
+    //   });
+    // } else {
+    //   setNavsToolbar({
+    //     ...navsToolbar,
+    //     activeCurrent: [...navsToolbar.activeCurrent, name],
+    //   });
+    // }
+    // })
   }
 
-  return { navsToolbar, toogleMenuToolbar, closeNav };
+  return { navsToolbar, toogleMenuToolbar };
 }

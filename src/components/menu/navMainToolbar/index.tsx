@@ -7,6 +7,7 @@ import styles from "./styles.module.css";
 
 export const NavMainToolbar = () => {
   const { user, changeArt } = React.useContext(UserContext);
+  console.log(user)
   return (
     <>
       {user?.arts?.map((item, index) => (

@@ -5,10 +5,11 @@ import { NavPincel } from "../components/menu/NavPincel";
 import { useNavToolbar } from "../hooks/NavToolbar";
 import { CanvasContext } from "./CanvasContext";
 
-interface IMenuProviderProps {}
+interface IMenuProviderProps { }
 interface IMenuContextProps {
   navsToolbar: {
-    activeCurrent: string;
+    default: string[];
+    activeCurrent: string[];
     navs: {
       sizePixel: {
         name: string;
@@ -20,17 +21,16 @@ interface IMenuContextProps {
       };
     };
   };
-  toogleMenuToolbar: (name: string) => void;
-  closeNav: () => void;
+  toogleMenuToolbar: (name: string[]) => void;
 }
 
 export const MenuContext = React.createContext({} as IMenuContextProps);
 
 export const MenuProvider: React.FC<IMenuProviderProps> = ({ children }) => {
-  const { navsToolbar, toogleMenuToolbar, closeNav } = useNavToolbar();
+  const { navsToolbar, toogleMenuToolbar } = useNavToolbar();
 
   return (
-    <MenuContext.Provider value={{ navsToolbar, toogleMenuToolbar, closeNav }}>
+    <MenuContext.Provider value={{ navsToolbar, toogleMenuToolbar }}>
       {children}
     </MenuContext.Provider>
   );

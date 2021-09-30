@@ -1,6 +1,7 @@
 import React from "react";
 import { CanvasContext } from "../../context/CanvasContext";
 import { MenuContext } from "../../context/MenuContext";
+import { ToolBarContext } from "../../context/ToolBarContext";
 import { icons } from "../../icons";
 import { ColorPalette } from "../colorPalette";
 import { Menu } from "../menu";
@@ -29,14 +30,14 @@ export const Toolbar = () => {
         <div className={styles.items_top}>
           <ToolbarItem type="draw" img={icons.draw} />
           <ToolbarItem type="erase" img={icons.erase} />
-          <ToolbarItem
+          {/* <ToolbarItem
             type="sizePixel"
             img={icons.size_pixel}
             hover={"/menu_close.png"}
             isActive={navsToolbar.activeCurrent === "sizePixel"}
             hasMenu
             isClickable
-          />
+          /> */}
 
           {/* <ToolbarItem
         type="gridSize"
@@ -49,6 +50,7 @@ export const Toolbar = () => {
           <ToolbarItem
             type="grid"
             img={icons.grid}
+            hover={icons.grid_disabled}
             isActive={!grid}
             isClickable
           />
@@ -63,7 +65,10 @@ export const Toolbar = () => {
         </div>
       </div>
       <div className={styles.info_item_toolbar}>
-        <ColorPalette />
+        <div className={styles.info_item_toolbar_content}>
+          <ColorPalette />
+          {<Menu />}
+        </div>
       </div>
     </div>
   );

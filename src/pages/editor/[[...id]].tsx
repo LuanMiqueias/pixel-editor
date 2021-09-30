@@ -17,6 +17,7 @@ import {
 import { MenuProvider } from "../../context/MenuContext";
 import { useRouter } from "next/router";
 import { EditorLayout } from "../../layouts/editor";
+import { NavGridSize } from "../../components/menu/NavGridSize";
 
 export default function Editor() {
   const { } = React.useContext(GlobalContext);
@@ -40,24 +41,20 @@ export default function Editor() {
       <h2 className={styles.moblie_waring}>
         Não há suporte para telas menores que <br /> <span>768px</span>
       </h2>
-      <GlobalContextProvider>
-        <MenuProvider>
-          <CanvasProvider>
-            <ColorsProvider>
-              <ToolBarProvider>
-                <WarningScreen />
-                <main className={`${styles.content}`}>
-                  <div className={styles.container_toolbar}>
-                    <Toolbar />
-                  </div>
-                  <div className={`${styles.container_canvas} animation_show_opacity`}>
-                    <Table />
-                  </div>
-                  <div className={styles.container_canvasConfig}>
-                    <Preview />
-                  </div>
-                </main>
-                {/* <main className={`${styles.content} animation_show_opacity`}>
+      <WarningScreen />
+      <main className={`${styles.content}`}>
+        <div className={styles.container_toolbar}>
+          <Toolbar />
+        </div>
+        <div className={`${styles.container_canvas} animation_show_opacity`}>
+          <Table />
+        </div>
+        <div className={styles.container_canvasConfig}>
+          <Preview />
+          <NavGridSize />
+        </div>
+      </main>
+      {/* <main className={`${styles.content} animation_show_opacity`}>
                   <div className={styles.column}>
                     <WarningScreen />
                     <ColorPalette />
@@ -72,11 +69,6 @@ export default function Editor() {
                     <Preview />
                   </div>
                 </main> */}
-              </ToolBarProvider>
-            </ColorsProvider>
-          </CanvasProvider>
-        </MenuProvider>
-      </GlobalContextProvider>
     </div>
   );
 }
