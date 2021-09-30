@@ -53,6 +53,13 @@ button.button_export {
 	color: var(--text-light);
 	background: var(--secundary-color);
 }
+button.button_export:disabled {
+	background: var(--link-disabled);
+	cursor: not-allowed;
+}
+button.button_export:disabled:hover {
+	background: var(--link-disabled);
+}
 button.button_export:hover {
 	background: var(--secundary-color-hover);
 	border-bottom: 1px solid transparent;
