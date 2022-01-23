@@ -3,8 +3,10 @@ import Head from "next/head";
 import Link from "next/link";
 import styles from "../styles/Home.module.css";
 import { CleanLayout } from "../layouts/clean";
+import { UserContext } from "../context/UserContext";
 
 export default function Home() {
+  const { auth } = React.useContext(UserContext)
   return (
     <div className={styles.container}>
       <Head>
@@ -22,7 +24,7 @@ export default function Home() {
           <p>Crie pixel arts incriveis</p>
         </div>
         <div className={`${styles.btn_start} animation_show_bottom`}>
-          <Link href="/editor">START</Link>
+          <Link href={auth ? "/user" : "/editor"}>START</Link>
         </div>
       </main>
       <footer className="animation_show_bottom">
