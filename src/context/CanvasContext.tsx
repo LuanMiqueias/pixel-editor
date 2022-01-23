@@ -70,7 +70,7 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
   const [history, setHistory] = React.useState([""]);
 
   const { showMessage, loadImage } = React.useContext(GlobalContext);
-  const { arts } = React.useContext(UserContext);
+  const { arts, selectedIDArt, user } = React.useContext(UserContext);
 
   const save = React.useCallback(() => {
     if (!canvasGrid.canvas || !canvasConfig.canvas) return;
@@ -95,6 +95,10 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
     };
     canvasConfig.canvas && setCanvasConfig(newSize);
   }, [size]);
+
+  React.useEffect(() => {
+    renderArt(selectedIDArt);
+  }, [selectedIDArt, arts])
 
   function initCanvas(
     canvasRef: React.RefObject<HTMLCanvasElement>,
@@ -308,9 +312,16 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
       save();
     };
   }
+  function changeArts() {
 
+  }
   function renderArt(id: string) {
-    console.log(arts.find((art) => art._id === id));
+    const image_url = arts?.find((art) => art._id === id);
+    // arts?.forEach(art => console.log(art._id, id))
+    if (!image_url) return;
+    const image = new Image();
+    image.src = image_url.image;
+    loadImageInCanvas(image)
   }
   function downloadCanvas() {
     if (canvasIsBlank) return;

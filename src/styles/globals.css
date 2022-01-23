@@ -143,3 +143,25 @@ a {
 		transform: initial;
 	}
 }
+
+/* width */
+::-webkit-scrollbar {
+	width: 5px;
+	border-radius: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: rgba(255, 255, 255, 0.02);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #738392;
+	border-radius: 10px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #516170;
+}

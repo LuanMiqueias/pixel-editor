@@ -18,13 +18,17 @@ import { MenuProvider } from "../../context/MenuContext";
 import { useRouter } from "next/router";
 import { EditorLayout } from "../../layouts/editor";
 import { NavGridSize } from "../../components/menu/NavGridSize";
+import { UserContext } from "../../context/UserContext";
 
 export default function Editor() {
   const { } = React.useContext(GlobalContext);
+  const { changeArt } = React.useContext(UserContext);
   const router = useRouter();
   React.useEffect(() => {
     if (!router.query?.id) return;
-  }, []);
+    changeArt(router.query?.id[0])
+  }, [router.query?.id]);
+
   return (
     <div className={styles.container}>
       <Head>
