@@ -11,6 +11,7 @@ interface IUserProps {
   user: IUser;
   arts: IArts[];
   selectedIDArt: string;
+  token: string;
   changeLoading: (active: boolean) => void;
   signin: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
@@ -47,6 +48,7 @@ export const UserProvider: React.FC<IUserProviderProps> = ({ children }) => {
     if (!localStorage.token) return;
     (async () => {
       changeToken(localStorage.token);
+      setToken(localStorage.token)
     })();
   }, []);
 
@@ -177,6 +179,7 @@ export const UserProvider: React.FC<IUserProviderProps> = ({ children }) => {
         loading,
         arts,
         selectedIDArt,
+        token,
         userData,
         changeArt,
         changeLoading,
