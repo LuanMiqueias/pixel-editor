@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { CanvasContext } from "./CanvasContext";
 
-interface IGlobalProviderProps {}
+interface IGlobalProviderProps { }
 interface IGlobalContextProps {
   message: { message?: string; type?: string };
   showMessage: (
@@ -13,17 +13,17 @@ interface IGlobalContextProps {
     canvas: HTMLCanvasElement,
     context: CanvasRenderingContext2D
   ) => void;
+
 }
 
 export const GlobalContext = React.createContext({} as IGlobalContextProps);
 
-export const GlobalContextProvider: React.FC<IGlobalProviderProps> = ({
-  children,
-}) => {
+export const GlobalContextProvider: React.FC<IGlobalProviderProps> = ({ children }) => {
   const [message, setMessage] = React.useState({
     message: "",
     type: "default",
   });
+
 
   function showMessage(
     type: "login" | "save" | "error" | "waring",
@@ -60,7 +60,6 @@ export const GlobalContextProvider: React.FC<IGlobalProviderProps> = ({
       context.drawImage(image, 0, 0, canvas.height, canvas.width);
     });
   }
-
   return (
     <GlobalContext.Provider
       value={{

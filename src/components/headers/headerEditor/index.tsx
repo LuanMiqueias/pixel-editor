@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { useRouter } from "next/router";
 import React from "react";
 import { CanvasContext } from "../../../context/CanvasContext";
 import { UserContext } from "../../../context/UserContext";
@@ -6,7 +7,8 @@ import { icons } from "../../../icons";
 import styles from '../styles.module.css';
 
 export const HeaderEditor: React.FC = () => {
-  const { auth, user } = React.useContext(UserContext);
+  const router = useRouter();
+  const { auth, logout } = React.useContext(UserContext);
   const { downloadCanvas, canvasIsBlank } = React.useContext(CanvasContext);
   return (
     <div className={styles.container}>

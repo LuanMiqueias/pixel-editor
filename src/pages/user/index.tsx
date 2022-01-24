@@ -6,11 +6,11 @@ import styles from "../../styles/user.module.css";
 import { CleanLayout } from "../../layouts/clean";
 import { DefaultLayout } from "../../layouts/default";
 import { UserContext } from "../../context/UserContext";
-
 export default function User() {
   const router = useRouter()
-  const { user } = React.useContext(UserContext);
+  const { user, auth, loading } = React.useContext(UserContext);
   const [projectSelected, setProjectSelected] = React.useState(0);
+
 
   function changeProject(indexProject) {
     setProjectSelected(indexProject)

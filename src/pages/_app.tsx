@@ -27,8 +27,10 @@ function MyApp({ Component, pageProps }) {
       </a> */}
       <GlobalContextProvider>
         <UserProvider>
-          <WarningScreen />
-          {getLayout(<Component {...pageProps} />)}
+          <>
+            <WarningScreen />
+            {getLayout(<Component {...pageProps} />)}
+          </>
         </UserProvider>
       </GlobalContextProvider>
     </>

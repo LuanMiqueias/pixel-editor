@@ -9,9 +9,15 @@ import api from "../services/api";
 import { UserContext } from "../context/UserContext";
 import Link from "next/link";
 import { CleanLayout } from "../layouts/clean";
+import { useRouter } from "next/router";
+import { GlobalContext } from "../context/GlobalContext";
 
 export default function Signup() {
-  const { auth, signin } = React.useContext(UserContext);
+  const router = useRouter()
+
+  const { showMessage } = React.useContext(GlobalContext);
+  const { signup, loading } = React.useContext(UserContext);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -32,12 +38,17 @@ export default function Signup() {
             password: Yup.string().min(5).required("Senha é obrigatorio!"),
           })}
           onSubmit={async (data) => {
-            const responce = await api.post("/user/signup", {
-              name: data.name,
-              email: data.email,
-              password: data.password,
-            });
-            console.log(await responce);
+            // const responce = await api.post("/user/signup", {
+            //   name: data.name,
+            //   email: data.email,
+            //   password: data.password,
+            // });
+            // console.log(await responce);
+            const auth = await signup({ ...data })
+            if (auth) {
+              router.push("/editor");
+              showMessage("login");
+            }
           }}
         >
           {(formik) => (
@@ -76,8 +87,8 @@ export default function Signup() {
                   {...formik.getFieldProps("password")}
                 />
               </main>
-              <button className={form.submit} type="submit">
-                Criar conta
+              <button className={form.submit} type="submit" disabled={loading}>
+                {loading ? 'carregando...' : 'Criar conta'}
               </button>
               <Link href="/signin">
                 <a className={form.btn_secondary}>

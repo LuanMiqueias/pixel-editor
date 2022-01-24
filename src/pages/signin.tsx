@@ -13,8 +13,7 @@ import Link from "next/link";
 import { CleanLayout } from "../layouts/clean";
 
 export default function Signin() {
-  const { signin, changeLoading, changeToken, loading } =
-    React.useContext(UserContext);
+  const { loading, signin } = React.useContext(UserContext);
   const { showMessage } = React.useContext(GlobalContext);
   const navigate = useRouter();
   return (
