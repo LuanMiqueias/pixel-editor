@@ -37,7 +37,7 @@ export default function User() {
               <div className={styles.project_detail_info_block}>
                 <p>colors</p>
                 <div className={`${styles.project_detail_colors}`} key={`${user?.arts[projectSelected]?._id}`}>
-                  {user?.arts[projectSelected]?.colors.map(item => <span style={{ background: item }} className="animation_show_opacity" key={`image-${user?.arts[projectSelected]?._id}`}></span>)}
+                  {user?.arts[projectSelected]?.colors.map((item, index) => <span style={{ background: item }} className="animation_show_opacity" key={`colors-${user?.arts[projectSelected]?._id}-${index}`}></span>)}
                 </div>
               </div>
             </div>
@@ -46,7 +46,7 @@ export default function User() {
         </div>
         <div className={styles.projects_card} key={`${user?.arts[projectSelected]?._id}`}>
           {user?.arts.map((art, index) => {
-            return <div className={`animation_show_opacity ${styles.artItem}`} key={`card-image-${user?.arts[projectSelected]?._id}`} onClick={() => changeProject(index)} onDoubleClick={() => router.push(`editor/${art?._id}`)}>
+            return <div className={`animation_show_opacity ${styles.artItem}`} key={`card-image-${user?.arts[projectSelected]?._id}-${index}`} onClick={() => changeProject(index)} onDoubleClick={() => router.push(`editor/${art?._id}`)}>
               <img src={art.image} alt={art.title} width="100%" />
               <h2>{art.title}</h2>
             </div>

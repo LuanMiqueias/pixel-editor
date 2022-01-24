@@ -11,6 +11,8 @@ interface IUserProps {
   user: IUser;
   arts: IArts[];
   selectedIDArt: string;
+  token: string;
+  currentArt: IArts;
   changeLoading: (active: boolean) => void;
   changeArt: (id: string) => void;
   setAuth: React.Dispatch<React.SetStateAction<boolean>>;
@@ -42,6 +44,7 @@ export const UserProvider: React.FC<IUserProviderProps> = ({ children }) => {
   const [arts, setArts] = React.useState<IArts[]>();
   const [selectedIDArt, setSelectedIDArt] = React.useState<string>();
   const [token, setToken] = React.useState('');
+  const [currentArt, setCurrentArt] = React.useState<IArts>(null);
 
   const { showMessage } = React.useContext(GlobalContext);
   const { canvasIsBlank, resetCells } = React.useContext(CanvasContext);
@@ -89,9 +92,10 @@ export const UserProvider: React.FC<IUserProviderProps> = ({ children }) => {
   }
 
   function changeArt(id: string) {
-    // if (!user?.arts?.find((art) => art._id === id)) {};
     canvasIsBlank && resetCells();
     setSelectedIDArt(id);
+    const art = user?.arts?.find((art) => art._id === id);
+    art && setCurrentArt(art)
   }
 
   const getUser = async () => {
@@ -209,6 +213,8 @@ export const UserProvider: React.FC<IUserProviderProps> = ({ children }) => {
         loading,
         arts,
         selectedIDArt,
+        token,
+        currentArt,
         setUser,
         setAuth,
         changeArt,

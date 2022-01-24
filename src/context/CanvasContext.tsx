@@ -2,6 +2,7 @@ import React from "react";
 import { NavGridSize } from "../components/menu/NavGridSize";
 import { NavMainToolbar } from "../components/menu/navMainToolbar";
 import { NavPincel } from "../components/menu/NavPincel";
+import { Art } from "../services/Arts";
 import { GlobalContext } from "./GlobalContext";
 import { MenuContext } from "./MenuContext";
 import { UserContext } from "./UserContext";
@@ -50,7 +51,7 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
   const [sizePixel, setSizePixel] = React.useState(1);
   const [indexUndoRedo, setIndexUndoRedo] = React.useState(0);
   const [menu, setMenu] = React.useState(false);
-
+  const { updateArt } = Art();
   const [grid, setGrid] = React.useState(true);
   const [canvasConfig, setCanvasConfig] = React.useState({
     canvas: null as HTMLCanvasElement,
@@ -130,6 +131,11 @@ export const CanvasProvider = ({ children }: ICanvasProviderProps) => {
 
   function saveState() {
     setHistory([...history, canvasConfig.canvas.toDataURL()]);
+    try {
+      updateArt({ image: canvasConfig.canvas.toDataURL() }, selectedIDArt);
+    } catch (err) {
+      // showMessage('error', err)
+    }
   }
 
   function changeGridSize(size) {

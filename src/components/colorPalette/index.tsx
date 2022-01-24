@@ -6,7 +6,13 @@ import { icons } from '../../icons'
 import { HexColorPicker, RgbaColorPicker, RgbaColor } from 'react-colorful';
 import { ColorsContext } from "../../context/ColorsContext";
 import { UserContext } from "../../context/UserContext";
+import { Art } from "../../services/Arts";
+import { GlobalContext } from "../../context/GlobalContext";
 export const ColorPalette = () => {
+  const [loadingColors, setLoadingColors] = React.useState(true)
+  const { showMessage } = React.useContext(GlobalContext);
+  const { currentArt } = React.useContext(UserContext);
+  const { updateArt } = Art();
   const [colors, setColors] = React.useState([
     "#041B3E",
     "#FFFFFF",
@@ -41,11 +47,22 @@ export const ColorPalette = () => {
   const { color, changeColor } = React.useContext(ColorsContext);
   const [colorsInput, setColorsInput] = React.useState<IColorsInput>();
   const { selectedIDArt, user } = React.useContext(UserContext);
+
   React.useEffect(() => {
+    setLoadingColors(true);
     if (!selectedIDArt || !user) return;
     setColors(user?.arts?.find((art) => art._id == selectedIDArt).colors);
+    setLoadingColors(false);
   }, [selectedIDArt, user]);
 
+  React.useEffect(() => {
+    if (colors === currentArt?.colors || !selectedIDArt || !colors || loadingColors) return;
+    try {
+      updateArt({ colors: [...colors] }, selectedIDArt);
+    } catch (err) {
+      showMessage('error', err)
+    }
+  }, [colors])
   return (
     <div className={`${styles.palette} animation_show_opacity`}>
       <div className={styles.container_background_color}>
